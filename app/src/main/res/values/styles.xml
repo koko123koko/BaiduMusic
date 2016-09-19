@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CustomTitle" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowTitleSize">50dp</item>
+    </style>
+
 </resources>
