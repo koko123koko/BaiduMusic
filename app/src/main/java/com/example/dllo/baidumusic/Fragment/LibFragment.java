@@ -4,6 +4,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
+import com.example.dllo.baidumusic.Adapter.FragVPAdapter;
 import com.example.dllo.baidumusic.Base.BaseFragment;
 import com.example.dllo.baidumusic.LibsFragment.MVFragment;
 import com.example.dllo.baidumusic.LibsFragment.RadioFragment;
@@ -58,4 +59,6 @@ public class LibFragment extends BaseFragment {
     protected int setLayout() {
         return R.layout.frag_lib;
     }
+
+
 }

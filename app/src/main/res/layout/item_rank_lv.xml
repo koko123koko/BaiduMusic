@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="100dp"
+
+   >
+
+    <RelativeLayout
+
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="100dp">
+        <ImageView
+            android:id="@+id/iv_item_rank_lv"
+            android:background="#33ff52"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ImageButton
+            android:id="@+id/ib_item_rank_lv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/bt_play_press"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+
+        >
+        <TextView
+            android:id="@+id/top_item_rank_lv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="新歌榜"
+            android:textSize="18dp"
+            />
+        <TextView
+            android:id="@+id/number1_item_rank_lv"
+            android:paddingTop="5dp"
+            android:layout_margin="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/img_top_number_1"
+            android:text="来日方长-薛子谦,黄玲"
+            android:textSize="10dp"
+            android:textColor="#888e8e"
+            />
+        <TextView
+            android:id="@+id/number2_item_rank_lv"
+            android:layout_margin="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/img_top_number_2"
+            android:text="来日方长-薛子谦,黄玲"
+            android:textSize="10dp"
+            android:textColor="#888e8e"
+            />
+        <TextView
+            android:id="@+id/number3_item_rank_lv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/img_top_number_3"
+            android:text="来日方长-薛子谦,黄玲"
+            android:layout_margin="2dp"
+            android:textSize="10dp"
+            android:textColor="#888e8e"
+            />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_marginTop="30dp"
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_songlist_detail_nor"
+
+        />
+
+
+</LinearLayout>

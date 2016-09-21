@@ -4,4 +4,14 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <ListView
+        android:id="@+id/lv_frag_rank"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+
+    </ListView>
+
 </LinearLayout>

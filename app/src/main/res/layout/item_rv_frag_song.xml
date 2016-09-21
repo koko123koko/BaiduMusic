@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/iv_ic_recommend_song"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/leftview"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:id="@+id/tv_song_frag"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_ic_recommend_song"
+            android:text="全部歌单"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageButton
+            android:id="@+id/ibtn_song_frag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_song_frag"
+            android:background="@mipmap/bt_mv_pull_down_normal"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/gv_item_rv_song"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        >
+    </GridView>
+</LinearLayout>

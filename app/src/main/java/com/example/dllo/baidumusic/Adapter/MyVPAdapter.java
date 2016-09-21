@@ -1,4 +1,4 @@
-package com.example.dllo.baidumusic.Fragment;
+package com.example.dllo.baidumusic.Adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,20 +9,21 @@ import java.util.ArrayList;
 /**
  * Created by dllo on 16/9/19.
  */
-public class FragVPAdapter extends FragmentPagerAdapter{
+public class MyVPAdapter extends FragmentPagerAdapter {
 
     private ArrayList<Fragment> fragments;
     private ArrayList<String> arrayList;
+
+    public void setArrayList(ArrayList<String> arrayList) {
+        this.arrayList = arrayList;
+        notifyDataSetChanged();
+    }
 
     public void setFragments(ArrayList<Fragment> fragments) {
         this.fragments = fragments;
     }
 
-    public void setArrayList(ArrayList<String> arrayList) {
-        this.arrayList = arrayList;
-    }
-
-    public FragVPAdapter(FragmentManager fm) {
+    public MyVPAdapter(FragmentManager fm) {
         super(fm);
     }
 

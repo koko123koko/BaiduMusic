@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.Window;
 
+import com.example.dllo.baidumusic.Adapter.MyVPAdapter;
 import com.example.dllo.baidumusic.Base.BaseActivity;
 import com.example.dllo.baidumusic.Fragment.KMusicFragment;
 import com.example.dllo.baidumusic.Fragment.LibFragment;
