@@ -5,6 +5,7 @@ package com.example.dllo.baidumusic.VolleyRequest;
  */
 public class URLVlaues {
 
+    public static final String RECOMMAND_ALL= "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.9.0.0&channel=1413c&operator=1&method=baidu.ting.plaza.index&cuid=8ADCB33F64DBB1F5314036551C922491";
     public static final String RECOMMAND = "http://url.cn/28a65ZG";
 
     //首页轮播图url

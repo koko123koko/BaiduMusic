@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/item_base_resong_div_img"
+        android:scaleType="centerCrop"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@mipmap/bt_recsong_play"
+
+
+        />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+
+        android:layout_margin="5dp">
+        <TextView
+            android:id="@+id/tv_item_base_resong_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="233"
+            android:textColor="#000000"
+            android:textSize="10dp"
+            />
+        <TextView
+            android:id="@+id/tv_item_base_resong_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="456"
+            android:textColor="#a9a7a7"
+            android:textSize="10dp"
+            />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/ibtn_item_base_resong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/bt_recsong_more"
+        />
+
+</LinearLayout>

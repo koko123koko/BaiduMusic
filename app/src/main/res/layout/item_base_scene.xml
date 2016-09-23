@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-              android:layout_width="match_parent"
+              android:orientation="horizontal"
+              android:layout_width="wrap_content"
               android:layout_height="wrap_content">
-    <ImageButton
+
+    <ImageView
+        android:id="@+id/iv_item_base_scene"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:background="@mipmap/img_recommend_lebo_blue"
         />
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/main_tab"
+    <ImageView
+        android:id="@+id/iv_item_base_scene_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        >
-    </android.support.design.widget.TabLayout>
-
-    <ImageButton
-        android:id="@+id/main_ibtn"
+        />
+    <TextView
+        android:id="@+id/tv_item_base_scene"
+        android:layout_below="@id/iv_item_base_scene_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@mipmap/ic_lyricpic_search"
-        android:layout_alignParentRight="true"
-        android:layout_centerInParent="true"
-
+        android:text="空虚寂寞冷"
+        android:textSize="10dp"
         />
+
 </RelativeLayout>

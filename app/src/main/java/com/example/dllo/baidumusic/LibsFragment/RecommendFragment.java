@@ -9,7 +9,7 @@ import com.android.volley.VolleyError;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.example.dllo.baidumusic.Adapter.MyRVAdapter;
 import com.example.dllo.baidumusic.Base.BaseFragment;
-import com.example.dllo.baidumusic.Bean.RecommendBean;
+import com.example.dllo.baidumusic.Bean.RecommBean;
 import com.example.dllo.baidumusic.R;
 import com.example.dllo.baidumusic.VolleyRequest.GsonRequest;
 import com.example.dllo.baidumusic.VolleyRequest.URLVlaues;
@@ -24,42 +24,22 @@ public class RecommendFragment extends BaseFragment {
 
     private RecyclerView rv;
     private ConvenientBanner cb;
-
-    private ArrayList<RecommendBean.ResultBean> been;
     private MyRVAdapter myRVAdapter;
-    private ArrayList<String> arrayList ;
-    private RecommendBean recommBean;
-
-    private RecommendBean.ResultBean.FocusBean focusBean;
-    private ArrayList<String> imgs = new ArrayList<>();
-
-    private RecommendBean.ResultBean.EntryBean entry;
-    private ArrayList<String> entryImg = new ArrayList<>();
-
+    private RecommBean recommBean;
+    private LinearLayoutManager manager;
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+//            sendGet();
+        }
+    }
     @Override
     protected void initData() {
-
-        arrayList = new ArrayList<>();
-        arrayList.add("mix_9");
-        arrayList.add("focus");
-        arrayList.add("mix_22");
-        arrayList.add("entry");
-        arrayList.add("mod_7");
-        arrayList.add("mix_5");
-        arrayList.add("recsong");
-        arrayList.add("diy");
-        arrayList.add("radio");
-        arrayList.add("scene");
-        arrayList.add("mix_1");
-
         rv.setHasFixedSize(true);
-
-        sendGet();
         myRVAdapter = new MyRVAdapter(getContext());
-        myRVAdapter.setArrayList(arrayList);
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
-
-
+        sendGet();
+        manager = new LinearLayoutManager(getContext());
         rv.setAdapter(myRVAdapter);
         rv.setLayoutManager(manager);
     }
@@ -74,37 +54,26 @@ public class RecommendFragment extends BaseFragment {
     protected int setLayout() {
         return R.layout.frag_recommend;
     }
+
     private void sendGet() {
-        String url = URLVlaues.RECOMMAND;
-        GsonRequest<RecommendBean> gsonRequest = new GsonRequest<RecommendBean>(url, RecommendBean.class, new Response.Listener<RecommendBean>() {
+        String url = URLVlaues.RECOMMAND_ALL;
+        Log.d("RecommendFragment", "sendGet");
+        GsonRequest<RecommBean> gsonRequest = new GsonRequest<RecommBean>(url, RecommBean.class, new Response.Listener<RecommBean>() {
             @Override
-            public void onResponse(RecommendBean response) {
-
-                Log.d("MyRVAdapter", "response:" + response);
+            public void onResponse(RecommBean response) {
                 recommBean = response;
-                focusBean = recommBean.getResult().getFocus();
-                for (int j = 0; j < focusBean.getResult().size(); j++) {
-
-                    Log.d("MyRVAdapter", focusBean.getResult().get(j).getRandpic());
-                    imgs.add(focusBean.getResult().get(j).getRandpic());
-                }
-
-                entry = recommBean.getResult().getEntry();
-                for (int i = 0; i < entry.getResult().size(); i++) {
-                    entryImg.add(entry.getResult().get(i).getIcon());
-                    Log.d("RecommendFragment", entry.getResult().get(i).getIcon());
-
-                }
-
-
-
                 myRVAdapter.setRecommBean(recommBean);
-                myRVAdapter.setFocusBean(focusBean);
-                myRVAdapter.setImgs(imgs);
-                myRVAdapter.setEntryBean(entry);
-                myRVAdapter.setEntryImg(entryImg);
+                ArrayList<RecommBean.ModuleBean> moduleBean = new ArrayList<>();
+                Log.d("RecommendFragment", "moduleBean.size():" + moduleBean.size());
+                int size = recommBean.getModule().size();
+                for (int i = 0; i < recommBean.getModule().size(); i++) {
+                    if(2 == i || 4 == i || 7 == i ||  14 == i){
+                        continue;
+                    }
+                    moduleBean.add(recommBean.getModule().get(i));
+                }
+                myRVAdapter.setModuleBeanArrayList(moduleBean);
                 myRVAdapter.notifyDataSetChanged();
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -112,7 +81,6 @@ public class RecommendFragment extends BaseFragment {
                 Log.d("RecommendFragment", "error:" + error);
             }
         });
-
         VolleySington.getInstance().addRequest(gsonRequest);
     }
 }

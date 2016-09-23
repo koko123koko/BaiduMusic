@@ -39,7 +39,7 @@
 
     <GridView
         android:id="@+id/gv_item_rv_song"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numColumns="2"
         android:verticalSpacing="10dp"
