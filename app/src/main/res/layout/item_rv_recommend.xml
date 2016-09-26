@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/iv_ic_recommend_song"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_margin="5dp"
             android:src="@mipmap/ic_recommend_song"
             android:layout_centerVertical="true"
@@ -27,9 +27,8 @@
             android:layout_margin="5dp"
             android:layout_toRightOf="@id/iv_ic_recommend_song"
             android:text="歌单推荐"
+            android:textSize="15dp"
             android:layout_centerVertical="true"
-
-
             />
 
         <TextView
@@ -40,6 +39,7 @@
             android:layout_margin="5dp"
             android:clickable="true"
             android:drawablePadding="2dp"
+            android:textSize="15dp"
             android:drawableRight="@mipmap/ic_action_more"
             android:text="更多"
             android:layout_centerVertical="true"

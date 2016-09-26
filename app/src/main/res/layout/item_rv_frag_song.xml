@@ -3,6 +3,8 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+
+
     <RelativeLayout
         android:layout_margin="5dp"
         android:layout_width="match_parent"
@@ -35,6 +37,24 @@
             android:background="@mipmap/bt_mv_pull_down_normal"
             android:layout_centerVertical="true"
             />
+
+        <TextView
+            android:id="@+id/tv_item_rv_frag_song_hot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最热"
+            android:layout_alignParentRight="true"
+            android:layout_margin="5dp"
+            />
+        <TextView
+            android:id="@+id/tv_item_rv_frag_song_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最新"
+            android:layout_toLeftOf="@id/tv_item_rv_frag_song_hot"
+            android:layout_margin="5dp"
+            />
+
     </RelativeLayout>
 
     <GridView
@@ -46,4 +66,5 @@
         android:horizontalSpacing="10dp"
         >
     </GridView>
+
 </LinearLayout>

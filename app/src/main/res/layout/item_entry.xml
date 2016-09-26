@@ -19,8 +19,9 @@
 
             <ImageButton
                 android:id="@+id/ibtn_item_adv_all"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:background="@null"
@@ -46,8 +47,9 @@
 
             <ImageButton
                 android:id="@+id/ibtn_item_adv_classify"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:background="@null"
@@ -88,8 +90,9 @@
                 <!--/>-->
                 <ImageButton
                     android:id="@+id/ibtn_item_adv_command"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
                     android:background="@null"
@@ -116,8 +119,9 @@
 
             <ImageButton
                 android:id="@+id/ibtn_item_adv_vip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:background="@null"
@@ -128,7 +132,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="歌曲分类"
+                android:text="会员专区"
                 android:textColor="#3e96ed"
                 android:textSize="12dp"
                 />

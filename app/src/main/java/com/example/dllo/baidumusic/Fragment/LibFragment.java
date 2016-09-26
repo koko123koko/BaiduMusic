@@ -29,17 +29,17 @@ public class LibFragment extends BaseFragment {
 
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("推荐");
-        arrayList.add("排行");
         arrayList.add("歌单");
-        arrayList.add("电台");
-        arrayList.add("MV");
+        arrayList.add("榜单");
+        arrayList.add("视频");
+        arrayList.add("K歌");
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new RecommendFragment());
-        fragments.add(new RankFragment());
         fragments.add(new SongFragment());
-        fragments.add(new RadioFragment());
+        fragments.add(new RankFragment());
         fragments.add(new MVFragment());
+        fragments.add(new RadioFragment());
 
 
 

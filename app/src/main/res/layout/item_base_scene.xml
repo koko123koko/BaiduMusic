@@ -1,29 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
-              android:layout_width="wrap_content"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+
+        >
+
     <ImageView
-        android:id="@+id/iv_item_base_scene"
+        android:id="@+id/iv_item_base_scene_orange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@mipmap/img_recommend_lebo_blue"
+        android:background="@mipmap/img_recommend_lebo_orange"
+        android:layout_centerInParent="true"
         />
 
     <ImageView
-        android:id="@+id/iv_item_base_scene_icon"
+        android:id="@+id/iv_item_base_scene_icon_orange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+
         />
     <TextView
-        android:id="@+id/tv_item_base_scene"
-        android:layout_below="@id/iv_item_base_scene_icon"
+        android:id="@+id/tv_item_base_scene_orange"
+        android:layout_below="@id/iv_item_base_scene_icon_orange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="空虚寂寞冷"
         android:textSize="10dp"
-        />
+        android:layout_centerHorizontal="true"
 
-</RelativeLayout>
+        />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+       >
+
+        <ImageView
+            android:id="@+id/iv_item_base_scene_green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/img_recommend_lebo_green"
+            android:layout_centerInParent="true"
+            />
+
+        <ImageView
+            android:id="@+id/iv_item_base_scene_icon_green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            />
+        <TextView
+            android:id="@+id/tv1_item_base_scene_green"
+            android:layout_below="@id/iv_item_base_scene_icon_green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="空虚寂寞冷"
+            android:textSize="10dp"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_item_base_scene_cyan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/img_recommend_lebo_cyan"
+            android:layout_centerInParent="true"
+
+            />
+
+        <ImageView
+            android:id="@+id/iv_item_base_scene_icon_cyan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            />
+        <TextView
+            android:id="@+id/tv_item_base_scene_cyan"
+            android:layout_below="@id/iv_item_base_scene_icon_cyan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="空虚寂寞冷"
+            android:textSize="10dp"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_item_base_scene_blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/img_recommend_lebo_blue"
+            android:layout_centerInParent="true"
+            />
+
+        <ImageView
+            android:id="@+id/iv_item_base_scene_icon_blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            />
+        <TextView
+            android:id="@+id/tv_item_base_scene_blue"
+            android:layout_below="@id/iv_item_base_scene_icon_blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="空虚寂寞冷"
+            android:textSize="10dp"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+</LinearLayout>

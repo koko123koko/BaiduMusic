@@ -38,8 +38,8 @@ public class MainActivity extends BaseActivity {
 
         ArrayList<String> arr = new ArrayList<>();
         arr.add("我的");
-        arr.add("乐库");
-        arr.add("K歌");
+        arr.add("音乐");
+        arr.add("动态");
         arr.add("直播");
 
         myVPAdapter.setFragments(fragments);

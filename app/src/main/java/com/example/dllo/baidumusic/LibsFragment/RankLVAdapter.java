@@ -9,7 +9,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dllo.baidumusic.Bean.RankBean;
 import com.example.dllo.baidumusic.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
@@ -19,37 +22,50 @@ import java.util.ArrayList;
  */
 public class RankLVAdapter extends BaseAdapter implements View.OnClickListener {
 
-    ArrayList<String> arrayList;
+    ArrayList<RankBean.Rank> arrayList;
+    ArrayList<RankBean.Rank.ContentBean> contentBeen;
     Context context;
-    ArrayList<Integer> imgs;
-    ArrayList<String> top;
+    private final DisplayImageOptions options;
+    //    ArrayList<Integer> imgs;
+//    ArrayList<String> top;
 
-    public void setTop(ArrayList<String> top) {
-        this.top = top;
-    }
-
-    public void setImgs(ArrayList<Integer> imgs) {
-        this.imgs = imgs;
-    }
+//    public void setTop(ArrayList<String> top) {
+//        this.top = top;
+//    }
+//
+//    public void setImgs(ArrayList<Integer> imgs) {
+//        this.imgs = imgs;
+//    }
 
     public RankLVAdapter(Context context) {
         this.context = context;
+        options = new DisplayImageOptions
+                .Builder()
+                .showImageForEmptyUri(R.mipmap.ic_launcher)
+                .showImageOnLoading(R.mipmap.ic_launcher)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .considerExifParams(true)
+                .build();
     }
 
 
 
-    public void setArrayList(ArrayList<String> arrayList) {
+    public void setArrayList(ArrayList<RankBean.Rank> arrayList) {
         this.arrayList = arrayList;
+
+
+        notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return top == null ? 0 : top.size();
+        return arrayList == null ? 0 : arrayList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return top.get(i);
+        return arrayList.get(i);
     }
 
     @Override
@@ -67,12 +83,18 @@ public class RankLVAdapter extends BaseAdapter implements View.OnClickListener {
         } else {
             rankViewHolder = (RankViewHolder)view.getTag();
         }
+//        Log.d("RankLVAdapter", arrayList.get(0).getContent().get(i).getTitle() + "-" + arrayList.get(0).getContent().get(i).getAuthor());
         rankViewHolder.ibtn.setOnClickListener(this);
-        rankViewHolder.number1.setText(arrayList.get(0));
-        rankViewHolder.number2.setText(arrayList.get(1));
-        rankViewHolder.number3.setText(arrayList.get(2));
-        rankViewHolder.iv.setImageResource(imgs.get(i));
-        rankViewHolder.top.setText(top.get(i));
+
+        for (int j = 0; j < 3; j++) {
+            rankViewHolder.number1.setText(arrayList.get(0).getContent().get(j).getTitle()+"-"+ arrayList.get(0).getContent().get(j).getAuthor());
+            rankViewHolder.number2.setText(arrayList.get(1).getContent().get(j).getTitle()+"-"+ arrayList.get(1).getContent().get(j).getAuthor());
+            rankViewHolder.number3.setText(arrayList.get(2).getContent().get(j).getTitle()+"-"+ arrayList.get(2).getContent().get(j).getAuthor());
+
+        }
+//      Picasso.with(context).load(arrayList.get(i).getPic_s210()).into(rankViewHolder.iv);
+        ImageLoader.getInstance().displayImage(arrayList.get(i).getPic_s210(),rankViewHolder.iv);
+        rankViewHolder.top.setText(arrayList.get(i).getName());
         return view;
     }
 

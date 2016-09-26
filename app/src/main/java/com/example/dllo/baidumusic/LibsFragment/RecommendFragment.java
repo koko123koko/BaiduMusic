@@ -62,12 +62,13 @@ public class RecommendFragment extends BaseFragment {
             @Override
             public void onResponse(RecommBean response) {
                 recommBean = response;
+
                 myRVAdapter.setRecommBean(recommBean);
                 ArrayList<RecommBean.ModuleBean> moduleBean = new ArrayList<>();
                 Log.d("RecommendFragment", "moduleBean.size():" + moduleBean.size());
                 int size = recommBean.getModule().size();
                 for (int i = 0; i < recommBean.getModule().size(); i++) {
-                    if(2 == i || 4 == i || 7 == i ||  14 == i){
+                    if(2 == i || 4 == i || 7 == i ||  14 == i|| 8 == i){
                         continue;
                     }
                     moduleBean.add(recommBean.getModule().get(i));
