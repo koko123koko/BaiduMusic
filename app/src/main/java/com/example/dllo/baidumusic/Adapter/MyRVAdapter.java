@@ -6,10 +6,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
@@ -25,7 +27,7 @@ import java.util.List;
 /**
  * Created by dllo on 16/9/19.
  */
-public class MyRVAdapter extends RecyclerView.Adapter {
+public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnItemClickListener {
 
     private Context context;
 
@@ -185,7 +187,7 @@ public class MyRVAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        Log.d("MyRVAdapter", "position:" + position);
+
         return moduleBeanArrayList.get(position).getPos();
     }
 
@@ -313,10 +315,10 @@ public class MyRVAdapter extends RecyclerView.Adapter {
      void show(Mix1ViewHolder holder,BTestAdapter testAdapter,int pos,int position){
          testAdapter.setPos(pos);
          holder.gv.setAdapter(testAdapter);
-
+        holder.gv.setOnItemClickListener(this);
          ViewGroup.LayoutParams layoutParams = holder.gv.getLayoutParams();
          if(pos == 14){
-             layoutParams.height = 400;
+             layoutParams.height = 500;
              holder.gv.setLayoutParams(layoutParams);
              holder.gv.setNumColumns(1);
          }
@@ -343,6 +345,11 @@ public class MyRVAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return moduleBeanArrayList == null ? 0 : moduleBeanArrayList.size();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Toast.makeText(context, "hehe" + i, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -383,7 +390,7 @@ public class MyRVAdapter extends RecyclerView.Adapter {
         @Override
         public void UpdateUI(Context context, int position, String data) {
             imageLoader.displayImage(data,imageView);
-
+//            Picasso.with(context).load(data).into(imageView);
 
         }
     }

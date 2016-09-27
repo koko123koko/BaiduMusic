@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
 import com.example.dllo.baidumusic.Adapter.FragVPAdapter;
 import com.example.dllo.baidumusic.Base.BaseFragment;
 import com.example.dllo.baidumusic.LibsFragment.MVFragment;
-import com.example.dllo.baidumusic.LibsFragment.RadioFragment;
+import com.example.dllo.baidumusic.LibsFragment.KMFragment;
 import com.example.dllo.baidumusic.LibsFragment.RankFragment;
 import com.example.dllo.baidumusic.LibsFragment.RecommendFragment;
 import com.example.dllo.baidumusic.LibsFragment.SongFragment;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by dllo on 16/9/19.
  */
-public class LibFragment extends BaseFragment {
+public class MusicFragment extends BaseFragment {
 
     private TabLayout tl;
     private ViewPager vp;
@@ -39,7 +39,7 @@ public class LibFragment extends BaseFragment {
         fragments.add(new SongFragment());
         fragments.add(new RankFragment());
         fragments.add(new MVFragment());
-        fragments.add(new RadioFragment());
+        fragments.add(new KMFragment());
 
 
 
@@ -51,13 +51,13 @@ public class LibFragment extends BaseFragment {
 
     @Override
     protected void initVIew() {
-        vp = bindView(R.id.frag_lib_vp);
-        tl = bindView(R.id.frag_lib_tl);
+        vp = bindView(R.id.frag_music_vp);
+        tl = bindView(R.id.frag_music_tl);
     }
 
     @Override
     protected int setLayout() {
-        return R.layout.frag_lib;
+        return R.layout.frag_music;
     }
 
 

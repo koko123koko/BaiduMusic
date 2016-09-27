@@ -23,7 +23,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
 
     Context context;
 
-    private ArrayList<SongBean.ContentBean> contentBeen;
+    private ArrayList<SongBean.DiyInfoBean> contentBeen;
 
     ArrayList<SongBean> songBeanArrayList;
     private final DisplayImageOptions options;
@@ -44,7 +44,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
                 .build();
     }
 
-    public void setContentBeen(ArrayList<SongBean.ContentBean> contentBeen) {
+    public void setContentBeen(ArrayList<SongBean.DiyInfoBean> contentBeen) {
         this.contentBeen = contentBeen;
         notifyDataSetChanged();
     }

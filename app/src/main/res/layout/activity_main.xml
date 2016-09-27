@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,21 +8,30 @@
     tools:context="com.example.dllo.baidumusic.MainActivity">
 
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <include layout="@layout/item_tab"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/main_vp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"
+        android:layout_weight="10"
+
         >
     </android.support.v4.view.ViewPager>
+
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/main_ll"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#d1ffffff"
+        >
 
         <ImageView
             android:id="@+id/main_iv"
@@ -45,6 +54,7 @@
             android:layout_toRightOf="@id/main_iv"
             android:text="中孝介"
             />
+
         <ImageButton
             android:id="@+id/main_ibtn_next"
             android:layout_width="wrap_content"
@@ -54,6 +64,7 @@
             android:layout_margin="5dp"
             android:background="@mipmap/bt_minibar_next_normal"
             />
+
         <ImageButton
             android:id="@+id/main_ibtn_play"
             android:layout_width="wrap_content"
@@ -63,6 +74,7 @@
             android:layout_toLeftOf="@id/main_ibtn_next"
             android:background="@mipmap/bt_minibar_play_normal"
             />
+
         <ImageButton
             android:id="@+id/main_ibtn_playinglist"
             android:layout_width="wrap_content"
@@ -74,9 +86,7 @@
 
             />
 
-
-
-
     </RelativeLayout>
 
-</LinearLayout>
+
+</RelativeLayout>

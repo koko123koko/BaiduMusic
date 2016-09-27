@@ -38,10 +38,14 @@ public class RecommendFragment extends BaseFragment {
     protected void initData() {
         rv.setHasFixedSize(true);
         myRVAdapter = new MyRVAdapter(getContext());
+
+
         sendGet();
         manager = new LinearLayoutManager(getContext());
         rv.setAdapter(myRVAdapter);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
         rv.setLayoutManager(manager);
+        rv.addItemDecoration(new RecycleViewDivider(getContext(),manager.getOrientation()));
     }
 
     @Override

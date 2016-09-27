@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.dllo.baidumusic.Bean.MVBean;
 import com.example.dllo.baidumusic.Bean.RecommBean;
 import com.example.dllo.baidumusic.Bean.SongBean;
 import com.example.dllo.baidumusic.R;
@@ -116,14 +117,20 @@ public class BTestAdapter<T> extends BHolderAdapter<T, BTestAdapter.ViewHolder> 
 
                 break;
             case 16:
-                SongBean.ContentBean contentBean = (SongBean.ContentBean) t;
+                SongBean.DiyInfoBean contentBean = (SongBean.DiyInfoBean) t;
 
                 //                imgToLoader(contentBean.getPic_300(),holder.ivSong);
-                imageLoader.displayImage(contentBean.getPic_300(), holder.ivSong);
-                holder.numSong.setText(contentBean.getListenum());
+                imageLoader.displayImage(contentBean.getList_pic(), holder.ivSong);
+                holder.numSong.setText(contentBean.getListen_num()+"");
                 holder.titleSong.setText(contentBean.getTitle());
-                holder.authorSong.setText(contentBean.getListid());
+                holder.authorSong.setText("by " + contentBean.getUsername());
                 break;
+
+            case 17:
+                MVBean.ResultBean.MvListBean mvListBean = (MVBean.ResultBean.MvListBean) t;
+                holder.tvArtist.setText(mvListBean.getArtist());
+                holder.tvTitle.setText(mvListBean.getTitle());
+                imageLoader.displayImage(mvListBean.getThumbnail2(),holder.ivMV);
 
 
         }
@@ -132,6 +139,13 @@ public class BTestAdapter<T> extends BHolderAdapter<T, BTestAdapter.ViewHolder> 
     @Override
     protected BTestAdapter.ViewHolder buildHolder(View view, T t, int i) {
         ViewHolder viewHolder = new ViewHolder();
+        if (pos == 17){
+           viewHolder.tvTitle = bindView(R.id.tv_mv_list_title,view);
+           viewHolder.ivMV = bindView(R.id.iv_mv_list,view);
+           viewHolder.tvArtist = bindView(R.id.tv_mv_list_artist,view);
+        }
+
+
         if (pos == 16) {
 
             viewHolder.ivSong = bindView (R.id.iv_item_song_list,view);//(ImageView) view.findViewById(R.id.iv_item_song_list);
@@ -143,9 +157,9 @@ public class BTestAdapter<T> extends BHolderAdapter<T, BTestAdapter.ViewHolder> 
         }
 
         if (pos == 8) {
-            viewHolder.imageViewBg = bindView (R.id.iv_item_base_scene,view);//(ImageView) view.findViewById(R.id.iv_item_base_scene);
-            viewHolder.imageViewSrc = bindView (R.id.iv_item_base_scene_icon,view);//(ImageView) view.findViewById(R.id.iv_item_base_scene_icon);
-            viewHolder.tvBg = bindView (R.id.tv_item_base_scene,view);//(TextView) view.findViewById(R.id.tv_item_base_scene);
+            viewHolder.imageViewBg = bindView (R.id.iv_item_base_scene_blue,view);//(ImageView) view.findViewById(R.id.iv_item_base_scene);
+            viewHolder.imageViewSrc = bindView (R.id.iv_item_base_scene_icon_blue,view);//(ImageView) view.findViewById(R.id.iv_item_base_scene_icon);
+            viewHolder.tvBg = bindView (R.id.tv_item_base_scene_blue,view);//(TextView) view.findViewById(R.id.tv_item_base_scene);
         }
 
         if (pos == 10 || pos == 14) {
@@ -167,6 +181,10 @@ public class BTestAdapter<T> extends BHolderAdapter<T, BTestAdapter.ViewHolder> 
 
     @Override
     protected View buildConvertView(LayoutInflater layoutInflater, T t, int i) {
+
+        if(pos == 17){
+            return inflate(R.layout.item_mv_list);
+        }
 
         if (pos == 16) {
             return inflate(R.layout.item_song_list);
@@ -194,6 +212,9 @@ public class BTestAdapter<T> extends BHolderAdapter<T, BTestAdapter.ViewHolder> 
         TextView numSong, authorSong, titleSong;
         ImageButton iBtnSong;
 
+        //17
+        ImageView ivMV;
+        TextView tvTitle,tvArtist;
 
     }
 

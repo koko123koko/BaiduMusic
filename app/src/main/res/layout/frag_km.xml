@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/edit_frag_km"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_search"
+        android:drawableLeft="@mipmap/ic_k_k"
+        android:drawablePadding="10dp"
+        android:hint="搜索K歌伴奏"
+        />
+
+
+    
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.bigkoo.convenientbanner.ConvenientBanner
+                android:id="@+id/cb_frag_km"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:canLoop="true"
+                >
+
+            </com.bigkoo.convenientbanner.ConvenientBanner>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+
+               android:background="@drawable/pic_bg"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_frag_km"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/ic_mymusic_ktv_normal"
+
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="10dp"
+                    android:layout_toRightOf="@id/iv_frag_km"
+                    android:text="我的K歌"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="10dp"
+                    android:background="@mipmap/ic_action_more"
+
+                    />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ktv_frag_km"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@mipmap/img_k_ktv"
+                    android:layout_margin="10dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="KTV热歌榜"
+                    android:layout_below="@id/ktv_frag_km"
+                   android:layout_marginLeft="20dp"
+
+
+                    />
+
+                <ImageView
+                    android:id="@+id/chinese_frag_km"
+                    android:layout_toRightOf="@id/ktv_frag_km"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@mipmap/img_k_chinese"
+                    android:layout_margin="10dp"
+                    />
+                <TextView
+                    android:id="@+id/tv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="华语金曲"
+                    android:layout_below="@id/chinese_frag_km"
+                    android:layout_toRightOf="@id/ktv_frag_km"
+                    android:layout_marginLeft="20dp"
+                    />
+                <ImageView
+                    android:id="@+id/occident_frag_km"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@mipmap/img_k_occident"
+                    android:layout_toRightOf="@id/chinese_frag_km"
+                    android:layout_margin="10dp"
+                    />
+                <TextView
+                    android:id="@+id/tv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="欧美经典"
+                    android:layout_below="@id/occident_frag_km"
+                    android:layout_toRightOf="@id/chinese_frag_km"
+                    android:layout_marginLeft="20dp"
+                    />
+
+                <ImageView
+                    android:id="@+id/man_frag_km"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@mipmap/img_k_man"
+                    android:layout_below="@id/tv1"
+                    android:layout_margin="10dp"
+                    />
+                <TextView
+                    android:id="@+id/tv4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="男歌手"
+                    android:layout_below="@id/man_frag_km"
+                    android:layout_marginLeft="20dp"
+
+                    />
+                <ImageView
+                    android:id="@+id/woman_frag_km"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@mipmap/img_k_woman"
+                    android:layout_below="@id/tv2"
+                    android:layout_toRightOf="@id/man_frag_km"
+                    android:layout_margin="10dp"
+                    />
+                <TextView
+                    android:id="@+id/tv5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="女歌手"
+                    android:layout_below="@id/woman_frag_km"
+                    android:layout_toRightOf="@id/man_frag_km"
+                    android:layout_marginLeft="20dp"
+                    />
+                <ImageView
+                    android:id="@+id/band_frag_km"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@mipmap/img_k_band"
+                    android:layout_below="@id/tv3"
+                    android:layout_toRightOf="@id/woman_frag_km"
+                    android:layout_margin="10dp"
+                    />
+                <TextView
+                    android:id="@+id/tv6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="乐队组合"
+                    android:layout_below="@id/man_frag_km"
+                    android:layout_toRightOf="@id/chinese_frag_km"
+                    android:layout_marginLeft="20dp"
+                    />
+
+            </RelativeLayout>
+
+
+            <ListView
+                android:id="@+id/lv_frag_km"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </ListView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/rv_frag_km"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+
+    <!--</android.support.v7.widget.RecyclerView>-->
+
+</LinearLayout>

@@ -1,7 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+
+        >
+
+        <ImageView
+            android:id="@+id/iv_ic_mv_frag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:background="@drawable/leftview"
+            />
+
+        <TextView
+            android:id="@+id/tv_mv_frag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@id/iv_ic_mv_frag"
+            android:text="全部歌单"
+            />
+
+        <ImageButton
+            android:id="@+id/ibtn_mv_frag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_mv_frag"
+            android:background="@mipmap/bt_mv_pull_down_normal"
+            />
+
+        <TextView
+            android:id="@+id/tv_item_mv_frag_hot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="5dp"
+            android:text="最热"
+            />
+
+        <TextView
+            android:id="@+id/tv_item_mv_frag_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_toLeftOf="@id/tv_item_mv_frag_hot"
+            android:text="最新"
+            />
+
+    </RelativeLayout>
+
+
+    <GridView
+        android:id="@+id/gv_item_mv_frag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:verticalSpacing="10dp"
+
+        >
+    </GridView>
+
 
 </LinearLayout>

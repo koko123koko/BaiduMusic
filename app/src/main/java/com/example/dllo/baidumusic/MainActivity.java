@@ -7,8 +7,8 @@ import android.view.Window;
 
 import com.example.dllo.baidumusic.Adapter.MyVPAdapter;
 import com.example.dllo.baidumusic.Base.BaseActivity;
-import com.example.dllo.baidumusic.Fragment.KMusicFragment;
-import com.example.dllo.baidumusic.Fragment.LibFragment;
+import com.example.dllo.baidumusic.Fragment.MSGFragment;
+import com.example.dllo.baidumusic.Fragment.MusicFragment;
 import com.example.dllo.baidumusic.Fragment.LiveFragment;
 import com.example.dllo.baidumusic.Fragment.MyFragment;
 
@@ -32,8 +32,8 @@ public class MainActivity extends BaseActivity {
         MyVPAdapter myVPAdapter = new MyVPAdapter(getSupportFragmentManager());
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new MyFragment());
-        fragments.add(new LibFragment());
-        fragments.add(new KMusicFragment());
+        fragments.add(new MusicFragment());
+        fragments.add(new MSGFragment());
         fragments.add(new LiveFragment());
 
         ArrayList<String> arr = new ArrayList<>();

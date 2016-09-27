@@ -86,12 +86,13 @@ public class RankLVAdapter extends BaseAdapter implements View.OnClickListener {
 //        Log.d("RankLVAdapter", arrayList.get(0).getContent().get(i).getTitle() + "-" + arrayList.get(0).getContent().get(i).getAuthor());
         rankViewHolder.ibtn.setOnClickListener(this);
 
-        for (int j = 0; j < 3; j++) {
-            rankViewHolder.number1.setText(arrayList.get(0).getContent().get(j).getTitle()+"-"+ arrayList.get(0).getContent().get(j).getAuthor());
-            rankViewHolder.number2.setText(arrayList.get(1).getContent().get(j).getTitle()+"-"+ arrayList.get(1).getContent().get(j).getAuthor());
-            rankViewHolder.number3.setText(arrayList.get(2).getContent().get(j).getTitle()+"-"+ arrayList.get(2).getContent().get(j).getAuthor());
+//        for (int j = 0; j < 3; j++) {
+            rankViewHolder.number1.setText(arrayList.get(i).getContent().get(0).getTitle()+"-"+ arrayList.get(i).getContent().get(0).getAuthor());
+            rankViewHolder.number2.setText(arrayList.get(i).getContent().get(1).getTitle()+"-"+ arrayList.get(i).getContent().get(1).getAuthor());
+            rankViewHolder.number3.setText(arrayList.get(i).getContent().get(2).getTitle()+"-"+ arrayList.get(i).getContent().get(2).getAuthor());
+//            Log.d("RankLVAdapter", arrayList.get(0).getContent().get(j).getTitle() + "-" + arrayList.get(0).getContent().get(j).getAuthor());
 
-        }
+
 //      Picasso.with(context).load(arrayList.get(i).getPic_s210()).into(rankViewHolder.iv);
         ImageLoader.getInstance().displayImage(arrayList.get(i).getPic_s210(),rankViewHolder.iv);
         rankViewHolder.top.setText(arrayList.get(i).getName());

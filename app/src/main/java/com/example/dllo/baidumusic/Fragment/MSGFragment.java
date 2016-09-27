@@ -1,4 +1,4 @@
-package com.example.dllo.baidumusic.LibsFragment;
+package com.example.dllo.baidumusic.Fragment;
 
 import com.example.dllo.baidumusic.Base.BaseFragment;
 import com.example.dllo.baidumusic.R;
@@ -6,7 +6,7 @@ import com.example.dllo.baidumusic.R;
 /**
  * Created by dllo on 16/9/19.
  */
-public class RadioFragment extends BaseFragment {
+public class MSGFragment extends BaseFragment {
     @Override
     protected void initData() {
 
@@ -19,6 +19,6 @@ public class RadioFragment extends BaseFragment {
 
     @Override
     protected int setLayout() {
-        return R.layout.frag_radio;
+        return R.layout.frag_msgmusic;
     }
 }

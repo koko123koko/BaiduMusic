@@ -8,6 +8,19 @@ public class URLVlaues {
     public static final String RECOMMAND_ALL= "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.9.0.0&channel=1413c&operator=1&method=baidu.ting.plaza.index&cuid=8ADCB33F64DBB1F5314036551C922491";
     public static final String RECOMMAND = "http://url.cn/28a65ZG";
 
+
+    //歌单 -- 最热
+    public static final String SONG_HOT = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.9.0.0&channel=1413c&operator=1&method=baidu.ting.ugcdiy.getChanneldiy&param=ehU89KYswcMRWNDWGfdd01ugcS8%2B1c891aJ47TFOGx%2FWu9YwjM9BVMZC4pzzHqXFSEbPI3z3BoOyi7hsZ2v%2FjKuV8DCOoHQKVKSdOa4T7hCsNrhDFklfo6iniJSvzBQl&timestamp=1474958544&sign=6432275fd0a0bdbb6678be4fd5764be9";
+
+    //视频 -- 最新
+    public static final String MV_NEW = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.9.0.0&channel=1413c&operator=1&provider=11%2C12&method=baidu.ting.mv.searchMV&format=json&order=1&page_num=1&page_size=20&query=%E5%85%A8%E9%83%A8";
+
+    //ktv
+    public static final String KTV = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.9.0.0&channel=1413c&operator=1&method=baidu.ting.learn.now&page_size=50";
+
+
+
+
     //首页轮播图url
     public static final String RECOMMAND_CAROUSE = "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.plaza.getFocusPic&format=json&from=ios&version=5.2.3&from=ios&channel=appstore";
     //首页热门推荐url

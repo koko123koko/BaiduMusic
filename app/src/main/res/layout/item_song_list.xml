@@ -11,7 +11,9 @@
         <ImageView
             android:id="@+id/iv_item_song_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="@drawable/pic_bg"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -20,6 +22,8 @@
             android:layout_alignParentBottom="true"
             android:text="1504"
             android:layout_margin="10dp"
+            android:textColor="#fff"
+            android:textSize="10dp"
             />
 
         <ImageButton
@@ -38,11 +42,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_item_song_list_title"
+        android:textSize="12dp"
+        android:textColor="#000"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_item_song_list_author"
+        android:textSize="10dp"
+        android:textColor="#b1aeae"
         />
 
 </LinearLayout>
