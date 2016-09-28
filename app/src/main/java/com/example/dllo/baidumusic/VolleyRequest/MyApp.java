@@ -22,7 +22,7 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         context = this;
-        File cacheDir = StorageUtils.getOwnCacheDirectory(getApplicationContext(), "imageloader/Cache");
+        File cacheDir = StorageUtils.getOwnCacheDirectory(this,"imageLoader/Cache",true);
         ImageLoaderConfiguration configuration =
                 new ImageLoaderConfiguration
                         .Builder(this)

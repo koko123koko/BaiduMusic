@@ -73,9 +73,14 @@ public class CircleImage extends ImageView {
 
         Paint paint = new Paint();
         paint.setAntiAlias(true);
+        paint.setFilterBitmap(true);
+
+        paint.setDither(true);
+
+        canves.drawARGB(0, 0, 0, 0);// 透明色
 
         //获取到宽高
-        canves.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2, bitmap.getHeight() / 2, paint);
+        canves.drawCircle(bitmap.getWidth() / 2  - 10, bitmap.getHeight() / 2 - 10, bitmap.getWidth() / 2, paint);
 
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
 

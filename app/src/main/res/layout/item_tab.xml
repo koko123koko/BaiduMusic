@@ -6,7 +6,7 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@mipmap/bt_playpage_button_list_normal"
+        android:background="@mipmap/bt_localsonglist_move_press"
         android:layout_centerVertical="true"
         android:layout_margin="10dp"
         />

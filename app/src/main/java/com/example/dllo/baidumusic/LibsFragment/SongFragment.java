@@ -82,6 +82,7 @@ public class SongFragment extends BaseFragment {
         songTV = bindView(R.id.tv_song_frag);
         gv = bindView(R.id.gv_item_rv_song);
         ibtn = bindView(R.id.ibtn_song_frag);
+//        ViewCompat.setNestedScrollingEnabled(gv,true);
     }
 
     @Override

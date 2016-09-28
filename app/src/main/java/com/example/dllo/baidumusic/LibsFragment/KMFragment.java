@@ -15,6 +15,7 @@ import com.bigkoo.convenientbanner.holder.Holder;
 import com.example.dllo.baidumusic.Base.BaseFragment;
 import com.example.dllo.baidumusic.Bean.KMBean;
 import com.example.dllo.baidumusic.R;
+import com.example.dllo.baidumusic.VolleyRequest.DisplaySingle;
 import com.example.dllo.baidumusic.VolleyRequest.GsonRequest;
 import com.example.dllo.baidumusic.VolleyRequest.URLVlaues;
 import com.example.dllo.baidumusic.VolleyRequest.VolleySington;
@@ -83,9 +84,10 @@ public class KMFragment extends BaseFragment {
 
         @Override
         public void UpdateUI(Context context, int position, String data) {
-            imageLoader.displayImage(data, imageView);
+//            imageLoader.displayImage(data, imageView);
             //            Picasso.with(context).load(data).into(imageView);
 
+            DisplaySingle.getInstance().show(data,imageView);
         }
     }
 
@@ -106,13 +108,6 @@ public class KMFragment extends BaseFragment {
                 }
                 kmlvAdapter.setKmBeanArrayList(itemsBean);
 
-                //                MVBean  mvBean = response;
-                //                ArrayList<MVBean> mvBeanArrayList = new ArrayList<>();
-                //                mvBeanArrayList.add(mvBean);
-                //                ArrayList<MVBean.ResultBean.MvListBean> mvListBeanArrayList = (ArrayList<MVBean.ResultBean.MvListBean>) mvBean.getResult().getMv_list();
-                //                mvgvAdapter = new BTestAdapter(getContext(), mvListBeanArrayList);
-                //                mvgvAdapter.setPos(17);
-                //                gv.setAdapter(mvgvAdapter);
 
             }
         }, new Response.ErrorListener() {

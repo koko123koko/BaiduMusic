@@ -11,8 +11,7 @@ import android.widget.TextView;
 
 import com.example.dllo.baidumusic.Bean.RankBean;
 import com.example.dllo.baidumusic.R;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.example.dllo.baidumusic.VolleyRequest.DisplaySingle;
 
 import java.util.ArrayList;
 
@@ -25,7 +24,7 @@ public class RankLVAdapter extends BaseAdapter implements View.OnClickListener {
     ArrayList<RankBean.Rank> arrayList;
     ArrayList<RankBean.Rank.ContentBean> contentBeen;
     Context context;
-    private final DisplayImageOptions options;
+//    private final DisplayImageOptions options;
     //    ArrayList<Integer> imgs;
 //    ArrayList<String> top;
 
@@ -39,14 +38,14 @@ public class RankLVAdapter extends BaseAdapter implements View.OnClickListener {
 
     public RankLVAdapter(Context context) {
         this.context = context;
-        options = new DisplayImageOptions
-                .Builder()
-                .showImageForEmptyUri(R.mipmap.ic_launcher)
-                .showImageOnLoading(R.mipmap.ic_launcher)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .considerExifParams(true)
-                .build();
+//        options = new DisplayImageOptions
+//                .Builder()
+//                .showImageForEmptyUri(R.mipmap.ic_launcher)
+//                .showImageOnLoading(R.mipmap.ic_launcher)
+//                .cacheInMemory(true)
+//                .cacheOnDisk(true)
+//                .considerExifParams(true)
+//                .build();
     }
 
 
@@ -94,7 +93,9 @@ public class RankLVAdapter extends BaseAdapter implements View.OnClickListener {
 
 
 //      Picasso.with(context).load(arrayList.get(i).getPic_s210()).into(rankViewHolder.iv);
-        ImageLoader.getInstance().displayImage(arrayList.get(i).getPic_s210(),rankViewHolder.iv);
+//        ImageLoader.getInstance().displayImage(arrayList.get(i).getPic_s210(),rankViewHolder.iv);
+        DisplaySingle.getInstance().show(arrayList.get(i).getPic_s210(),rankViewHolder.iv);
+
         rankViewHolder.top.setText(arrayList.get(i).getName());
         return view;
     }

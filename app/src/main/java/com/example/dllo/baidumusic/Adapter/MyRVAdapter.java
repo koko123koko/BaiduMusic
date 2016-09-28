@@ -18,8 +18,9 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.example.dllo.baidumusic.Bean.RecommBean;
 import com.example.dllo.baidumusic.R;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.example.dllo.baidumusic.VolleyRequest.DisplaySingle;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,8 +67,8 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
     private ArrayList<RecommBean.ResultBean.SceneBean.Scene.OperationBean> operationBeanArrayList;
     private ArrayList<RecommBean.ResultBean.SceneBean.Scene.OtherBean> otherBeanArrayList;
 
-    private ImageLoader imageLoader;
-    private final DisplayImageOptions options;
+//    private ImageLoader imageLoader;
+//    private final DisplayImageOptions options;
 
     public void setModuleBeanArrayList(ArrayList<RecommBean.ModuleBean> moduleBeanArrayList) {
         this.moduleBeanArrayList = moduleBeanArrayList;
@@ -78,15 +79,15 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
 
     public MyRVAdapter(Context context) {
         this.context = context;
-        imageLoader = ImageLoader.getInstance();
-        options = new DisplayImageOptions
-                .Builder()
-                .showImageForEmptyUri(R.mipmap.ic_launcher)
-                .showImageOnLoading(R.mipmap.ic_launcher)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .considerExifParams(true)
-                .build();
+//        imageLoader = ImageLoader.getInstance();
+//        options = new DisplayImageOptions
+//                .Builder()
+//                .showImageForEmptyUri(R.mipmap.ic_launcher)
+//                .showImageOnLoading(R.mipmap.ic_launcher)
+//                .cacheInMemory(true)
+//                .cacheOnDisk(true)
+//                .considerExifParams(true)
+//                .build();
 
     }
 
@@ -268,10 +269,14 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
             case 2:
                 EntryViewHolder entryViewHolder = (EntryViewHolder) holder;
                 if (entryBean != null) {
-                    imageLoader.displayImage(entryArr.get(0),entryViewHolder.allSong);
-                    imageLoader.displayImage(entryArr.get(1),entryViewHolder.classify);
-                    imageLoader.displayImage(entryArr.get(2),entryViewHolder.btnCommand);
-                    imageLoader.displayImage(entryArr.get(3),entryViewHolder.vip);
+//                    imageLoader.displayImage(entryArr.get(0),entryViewHolder.allSong);
+//                    imageLoader.displayImage(entryArr.get(1),entryViewHolder.classify);
+//                    imageLoader.displayImage(entryArr.get(2),entryViewHolder.btnCommand);
+//                    imageLoader.displayImage(entryArr.get(3),entryViewHolder.vip);
+                    DisplaySingle.getInstance().show(entryArr.get(0),entryViewHolder.allSong);
+                    DisplaySingle.getInstance().show(entryArr.get(1),entryViewHolder.classify);
+                    DisplaySingle.getInstance().show(entryArr.get(2),entryViewHolder.btnCommand);
+                    DisplaySingle.getInstance().show(entryArr.get(3),entryViewHolder.vip);
                 }
                 break;
             case 4:
@@ -316,6 +321,7 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
          testAdapter.setPos(pos);
          holder.gv.setAdapter(testAdapter);
         holder.gv.setOnItemClickListener(this);
+         holder.gv.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(),false,true));
          ViewGroup.LayoutParams layoutParams = holder.gv.getLayoutParams();
          if(pos == 14){
              layoutParams.height = 500;
@@ -339,7 +345,8 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
          } else {
              holder.more.setText(moduleBeanArrayList.get(position).getTitle_more());
          }
-         imageLoader.displayImage(moduleBeanArrayList.get(position).getPicurl(),holder.iv);
+//         imageLoader.displayImage(moduleBeanArrayList.get(position).getPicurl(),holder.iv);
+         DisplaySingle.getInstance().show(moduleBeanArrayList.get(position).getPicurl(),holder.iv);
      }
 
     @Override
@@ -389,8 +396,9 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
         }
         @Override
         public void UpdateUI(Context context, int position, String data) {
-            imageLoader.displayImage(data,imageView);
+//            imageLoader.displayImage(data,imageView);
 //            Picasso.with(context).load(data).into(imageView);
+            DisplaySingle.getInstance().show(data,imageView);
 
         }
     }
