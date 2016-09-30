@@ -41,4 +41,7 @@ public class MyVPAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return arrayList.get(position);
     }
+
+
+
 }

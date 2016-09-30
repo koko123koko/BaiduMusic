@@ -1,6 +1,8 @@
 package com.example.dllo.baidumusic.Adapter;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,10 +19,13 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.example.dllo.baidumusic.Bean.RecommBean;
+import com.example.dllo.baidumusic.Bus.RepleseFragEvent;
 import com.example.dllo.baidumusic.R;
 import com.example.dllo.baidumusic.VolleyRequest.DisplaySingle;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +33,9 @@ import java.util.List;
 /**
  * Created by dllo on 16/9/19.
  */
-public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnItemClickListener {
+public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnItemClickListener, View.OnClickListener {
 
-    private Context context;
+
 
 
     private RecommBean recommBean;
@@ -67,8 +72,8 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
     private ArrayList<RecommBean.ResultBean.SceneBean.Scene.OperationBean> operationBeanArrayList;
     private ArrayList<RecommBean.ResultBean.SceneBean.Scene.OtherBean> otherBeanArrayList;
 
-//    private ImageLoader imageLoader;
-//    private final DisplayImageOptions options;
+    //    private ImageLoader imageLoader;
+    //    private final DisplayImageOptions options;
 
     public void setModuleBeanArrayList(ArrayList<RecommBean.ModuleBean> moduleBeanArrayList) {
         this.moduleBeanArrayList = moduleBeanArrayList;
@@ -76,18 +81,21 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
         notifyDataSetChanged();
     }
 
+    private Context context;
+    private FragmentTransaction transaction;
+    private FragmentManager fragmentManager;
+
+    public void setFragmentManager(FragmentManager fragmentManager) {
+        this.fragmentManager = fragmentManager;
+    }
+
+    public void setTransaction(FragmentTransaction transaction) {
+        this.transaction = transaction;
+    }
 
     public MyRVAdapter(Context context) {
         this.context = context;
-//        imageLoader = ImageLoader.getInstance();
-//        options = new DisplayImageOptions
-//                .Builder()
-//                .showImageForEmptyUri(R.mipmap.ic_launcher)
-//                .showImageOnLoading(R.mipmap.ic_launcher)
-//                .cacheInMemory(true)
-//                .cacheOnDisk(true)
-//                .considerExifParams(true)
-//                .build();
+
 
     }
 
@@ -213,34 +221,35 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
                 View entryView = LayoutInflater.from(context).inflate(R.layout.item_entry, parent, false);
                 EntryViewHolder entryViewHolder = new EntryViewHolder(entryView);
                 return entryViewHolder;
-//            case 4:
-//                return getViewHolder(parent);
-//            case 6:
-//                return getViewHolder(parent);
-//            case 7:
-//                return getViewHolder(parent);
-//            case 10:
-//                return getViewHolder(parent);
-//            case 11:
-//                return getViewHolder(parent);
-//            case 12:
-//                return getViewHolder(parent);
-//            case 13:
-//                return getViewHolder(parent);
-//            case 14:
-//                return getViewHolder(parent);
-//            default:
-//                return null;
+            //            case 4:
+            //                return getViewHolder(parent);
+            //            case 6:
+            //                return getViewHolder(parent);
+            //            case 7:
+            //                return getViewHolder(parent);
+            //            case 10:
+            //                return getViewHolder(parent);
+            //            case 11:
+            //                return getViewHolder(parent);
+            //            case 12:
+            //                return getViewHolder(parent);
+            //            case 13:
+            //                return getViewHolder(parent);
+            //            case 14:
+            //                return getViewHolder(parent);
+            //            default:
+            //                return null;
 
 
         }
         return getViewHolder(parent);
     }
 
-    RecyclerView.ViewHolder getViewHolder(ViewGroup parent){
-        View view =LayoutInflater.from(context).inflate(R.layout.item_rv_recommend, parent, false);
+    RecyclerView.ViewHolder getViewHolder(ViewGroup parent) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_rv_recommend, parent, false);
         return new Mix1ViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
@@ -263,53 +272,61 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
                 }, focusArr)
                         .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL)
                         .setPageIndicator(new int[]{R.mipmap.ic_dot_default_unselected, R.mipmap.ic_dot_default_selected})
-                        ;
+                ;
                 focusViewHolder.cb.startTurning(5000);
                 break;
             case 2:
                 EntryViewHolder entryViewHolder = (EntryViewHolder) holder;
                 if (entryBean != null) {
-//                    imageLoader.displayImage(entryArr.get(0),entryViewHolder.allSong);
-//                    imageLoader.displayImage(entryArr.get(1),entryViewHolder.classify);
-//                    imageLoader.displayImage(entryArr.get(2),entryViewHolder.btnCommand);
-//                    imageLoader.displayImage(entryArr.get(3),entryViewHolder.vip);
-                    DisplaySingle.getInstance().show(entryArr.get(0),entryViewHolder.allSong);
-                    DisplaySingle.getInstance().show(entryArr.get(1),entryViewHolder.classify);
-                    DisplaySingle.getInstance().show(entryArr.get(2),entryViewHolder.btnCommand);
-                    DisplaySingle.getInstance().show(entryArr.get(3),entryViewHolder.vip);
+                    //                    imageLoader.displayImage(entryArr.get(0),entryViewHolder.allSong);
+                    //                    imageLoader.displayImage(entryArr.get(1),entryViewHolder.classify);
+                    //                    imageLoader.displayImage(entryArr.get(2),entryViewHolder.btnCommand);
+                    //                    imageLoader.displayImage(entryArr.get(3),entryViewHolder.vip);
+                    DisplaySingle.getInstance().show(entryArr.get(0), entryViewHolder.allSong);
+                    DisplaySingle.getInstance().show(entryArr.get(1), entryViewHolder.classify);
+                    DisplaySingle.getInstance().show(entryArr.get(2), entryViewHolder.btnCommand);
+                    DisplaySingle.getInstance().show(entryArr.get(3), entryViewHolder.vip);
+
+
+                    entryViewHolder.allSong.setOnClickListener(this);
+                    entryViewHolder.classify.setOnClickListener(this);
+                    entryViewHolder.btnCommand.setOnClickListener(this);
+                    entryViewHolder.vip.setOnClickListener(this);
+
+
                 }
                 break;
             case 4:
                 BTestAdapter diyBaseAdapter = new BTestAdapter(context, diyBeanArrayList);
-                show((Mix1ViewHolder) holder,diyBaseAdapter,num,position);
+                show((Mix1ViewHolder) holder, diyBaseAdapter, num, position);
                 break;
             case 6:
                 BTestAdapter mix1BaseAdapter = new BTestAdapter(context, mix1ArrayList);
-                show((Mix1ViewHolder) holder,mix1BaseAdapter,num,position);
+                show((Mix1ViewHolder) holder, mix1BaseAdapter, num, position);
                 break;
             case 7:
                 BTestAdapter bTestAdapter = new BTestAdapter(context, mix22List);
-                show((Mix1ViewHolder) holder,bTestAdapter,num,position);
+                show((Mix1ViewHolder) holder, bTestAdapter, num, position);
                 break;
             case 10:
                 BTestAdapter recsongAdapter = new BTestAdapter(context, recsongArrayList);
-                show((Mix1ViewHolder) holder,recsongAdapter,num,position);
+                show((Mix1ViewHolder) holder, recsongAdapter, num, position);
                 break;
             case 11:
                 BTestAdapter mix9BaseAdapter = new BTestAdapter(context, mix9ArrayList);
-                show((Mix1ViewHolder) holder,mix9BaseAdapter,num,position);
+                show((Mix1ViewHolder) holder, mix9BaseAdapter, num, position);
                 break;
             case 12:
                 BTestAdapter mix5BaseAdapter = new BTestAdapter(context, mix5ArrayList);
-                show((Mix1ViewHolder) holder,mix5BaseAdapter,num,position);
+                show((Mix1ViewHolder) holder, mix5BaseAdapter, num, position);
                 break;
             case 13:
                 BTestAdapter radioBaseAdapter = new BTestAdapter(context, radioArrayList);
-                show((Mix1ViewHolder) holder,radioBaseAdapter,num,position);
+                show((Mix1ViewHolder) holder, radioBaseAdapter, num, position);
                 break;
             case 14:
                 BTestAdapter mod7Adapter = new BTestAdapter(context, mod7ArrayList);
-                show((Mix1ViewHolder) holder,mod7Adapter,num,position);
+                show((Mix1ViewHolder) holder, mod7Adapter, num, position);
                 break;
 
         }
@@ -317,37 +334,37 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
 
     }
 
-     void show(Mix1ViewHolder holder,BTestAdapter testAdapter,int pos,int position){
-         testAdapter.setPos(pos);
-         holder.gv.setAdapter(testAdapter);
+    void show(Mix1ViewHolder holder, BTestAdapter testAdapter, int pos, int position) {
+        testAdapter.setPos(pos);
+        holder.gv.setAdapter(testAdapter);
         holder.gv.setOnItemClickListener(this);
-         holder.gv.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(),false,true));
-         ViewGroup.LayoutParams layoutParams = holder.gv.getLayoutParams();
-         if(pos == 14){
-             layoutParams.height = 500;
-             holder.gv.setLayoutParams(layoutParams);
-             holder.gv.setNumColumns(1);
-         }
-         if(pos == 10){
-             layoutParams.height = 350;
-             holder.gv.setLayoutParams(layoutParams);
-             holder.gv.setNumColumns(1);
-         }
-         if(pos == 11 || pos == 7){
-             layoutParams.height =ViewGroup.LayoutParams.WRAP_CONTENT;
-             holder.gv.setLayoutParams(layoutParams);
-         }
+        holder.gv.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), false, true));
+        ViewGroup.LayoutParams layoutParams = holder.gv.getLayoutParams();
+        if (pos == 14) {
+            layoutParams.height = 500;
+            holder.gv.setLayoutParams(layoutParams);
+            holder.gv.setNumColumns(1);
+        }
+        if (pos == 10) {
+            layoutParams.height = 350;
+            holder.gv.setLayoutParams(layoutParams);
+            holder.gv.setNumColumns(1);
+        }
+        if (pos == 11 || pos == 7) {
+            layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            holder.gv.setLayoutParams(layoutParams);
+        }
 
 
-         holder.tv.setText(moduleBeanArrayList.get(position).getTitle());
-         if(holder.more.getText() == ""){
-             holder.more.setVisibility(View.GONE);
-         } else {
-             holder.more.setText(moduleBeanArrayList.get(position).getTitle_more());
-         }
-//         imageLoader.displayImage(moduleBeanArrayList.get(position).getPicurl(),holder.iv);
-         DisplaySingle.getInstance().show(moduleBeanArrayList.get(position).getPicurl(),holder.iv);
-     }
+        holder.tv.setText(moduleBeanArrayList.get(position).getTitle());
+        if (holder.more.getText() == "") {
+            holder.more.setVisibility(View.GONE);
+        } else {
+            holder.more.setText(moduleBeanArrayList.get(position).getTitle_more());
+        }
+        //         imageLoader.displayImage(moduleBeanArrayList.get(position).getPicurl(),holder.iv);
+        DisplaySingle.getInstance().show(moduleBeanArrayList.get(position).getPicurl(), holder.iv);
+    }
 
     @Override
     public int getItemCount() {
@@ -357,6 +374,44 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Toast.makeText(context, "hehe" + i, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View view) {
+
+
+        RepleseFragEvent event = new RepleseFragEvent();
+
+        switch (view.getId()) {
+
+            case R.id.ibtn_item_adv_all:
+
+//                MainActivity.repleseFrag(new SongerFrag());
+
+//                Toast.makeText(context, "歌手", Toast.LENGTH_SHORT).show();
+
+
+                event.setFragment(new SongerFrag());
+                EventBus.getDefault().post(event);
+
+                break;
+            case R.id.ibtn_item_adv_classify:
+//                Toast.makeText(context, "歌曲分类", Toast.LENGTH_SHORT).show();
+                event.setFragment(new SongClassify());
+                EventBus.getDefault().post(event);
+
+                break;
+            case R.id.ibtn_item_adv_command:
+
+                Toast.makeText(context, "电台", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ibtn_item_adv_vip:
+
+                Log.d("MyRVAdapter", "VIP");
+                break;
+
+        }
+
     }
 
 
@@ -379,6 +434,7 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
     class FocusViewHolder extends RecyclerView.ViewHolder {
         //        TextView day;
         ConvenientBanner cb;
+
         public FocusViewHolder(View itemView) {
             super(itemView);
             cb = (ConvenientBanner) itemView.findViewById(R.id.frag_recommend_cb);
@@ -388,17 +444,19 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
 
     public class LocalImageHolderView implements Holder<String> {
         private ImageView imageView;
+
         @Override
         public View createView(Context context) {
             imageView = new ImageView(context);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             return imageView;
         }
+
         @Override
         public void UpdateUI(Context context, int position, String data) {
-//            imageLoader.displayImage(data,imageView);
-//            Picasso.with(context).load(data).into(imageView);
-            DisplaySingle.getInstance().show(data,imageView);
+            //            imageLoader.displayImage(data,imageView);
+            //            Picasso.with(context).load(data).into(imageView);
+            DisplaySingle.getInstance().show(data, imageView);
 
         }
     }

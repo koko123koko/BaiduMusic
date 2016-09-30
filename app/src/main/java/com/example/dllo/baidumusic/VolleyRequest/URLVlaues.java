@@ -19,6 +19,9 @@ public class URLVlaues {
     public static final String KTV = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.9.0.0&channel=1413c&operator=1&method=baidu.ting.learn.now&page_size=50";
 
 
+    //歌手
+    public static final String SONGER= "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.9.0.0&channel=1413c&operator=1&method=baidu.ting.artist.getList&format=json&offset=0&limit=48&order=1&area=0&sex=0";
+
 
 
     //首页轮播图url

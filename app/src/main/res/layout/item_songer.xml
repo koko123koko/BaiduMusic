@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#fff"
+              android:orientation="vertical"
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#2f99ea"
+    >
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@mipmap/ic_back_normal"-->
+        <!--/>-->
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/tv_item_songer_name"
+    android:text="歌手"
+    android:textColor="#fff"
+    android:drawableLeft="@mipmap/ic_back_normal"
+    android:textSize="22dp"
+    android:drawablePadding="10dp"
+    android:layout_margin="10dp"
+    />
+</RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_item_songer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+
+</LinearLayout>

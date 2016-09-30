@@ -62,6 +62,7 @@ public class KMLVAdapter extends BaseAdapter{
         return view;
     }
 
+    //减少findViewById 的操作 viewHolder
     class KMViewHolder{
 
         private final TextView name;

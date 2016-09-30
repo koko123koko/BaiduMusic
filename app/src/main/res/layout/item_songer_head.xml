@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="150dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="热门歌手"
+            android:drawableLeft="@drawable/leftview"
+            android:drawablePadding="5dp"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="更多"
+             android:drawableRight="@mipmap/ic_action_more"
+            android:layout_margin="10dp"
+
+            />
+
+    </RelativeLayout>
+
+    <com.bigkoo.convenientbanner.ConvenientBanner
+        android:id="@+id/cb_item_songer_head"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.bigkoo.convenientbanner.ConvenientBanner>
+
+</LinearLayout>

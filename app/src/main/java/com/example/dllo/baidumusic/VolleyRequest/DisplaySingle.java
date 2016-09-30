@@ -46,4 +46,11 @@ public class DisplaySingle {
         ImageLoader.getInstance().displayImage(uri, imageView);
     }
 
+//    public void repleseFrag(Fragment fragment){
+//        FragmentManager fragmentManager = Application.getSupportFragmentManager();
+//        FragmentTransaction transaction = fragmentManager.beginTransaction();
+//        transaction.replace(R.id.main_fl,fragment);
+//        transaction.commit();
+//    }
+
 }

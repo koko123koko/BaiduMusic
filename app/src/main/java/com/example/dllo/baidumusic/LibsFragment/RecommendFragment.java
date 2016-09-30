@@ -3,6 +3,7 @@ package com.example.dllo.baidumusic.LibsFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,39 +21,73 @@ import java.util.ArrayList;
 /**
  * Created by dllo on 16/9/19.
  */
-public class RecommendFragment extends BaseFragment {
+public class RecommendFragment extends BaseFragment implements View.OnClickListener {
 
     private RecyclerView rv;
     private ConvenientBanner cb;
     private MyRVAdapter myRVAdapter;
     private RecommBean recommBean;
     private LinearLayoutManager manager;
+
+
+//    public RecommendFragment() {
+//        super();
+////        EventBus.getDefault().register(this);
+//    }
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void setFragment(RepleseFragEvent event){
+
+
+//        repleseFrag(event.getFragment());
+//    }
+//
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        EventBus.getDefault().unregister(this);
+//    }
+
+//    public  void repleseFrag(Fragment fragment){
+//        Log.d("MainActivity", "233");
+//        FragmentManager manager =getActivity().getSupportFragmentManager();
+//        FragmentTransaction transaction = manager.beginTransaction();
+//        transaction.replace(R.id.item_main_fl,fragment);
+//        transaction.commit();
+//    }
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-//            sendGet();
+
         }
     }
+
     @Override
     protected void initData() {
         rv.setHasFixedSize(true);
         myRVAdapter = new MyRVAdapter(getContext());
 
 
+
         sendGet();
         manager = new LinearLayoutManager(getContext());
         rv.setAdapter(myRVAdapter);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
+
         rv.setLayoutManager(manager);
-        rv.addItemDecoration(new RecycleViewDivider(getContext(),manager.getOrientation()));
+        rv.addItemDecoration(new RecycleViewDivider(getContext(), manager.getOrientation()));
     }
 
     @Override
     protected void initVIew() {
         cb = bindView(R.id.frag_recommend_cb);
         rv = bindView(R.id.frag_recommend_rv);
+
     }
+
+
+
 
     @Override
     protected int setLayout() {
@@ -72,7 +107,7 @@ public class RecommendFragment extends BaseFragment {
                 Log.d("RecommendFragment", "moduleBean.size():" + moduleBean.size());
                 int size = recommBean.getModule().size();
                 for (int i = 0; i < recommBean.getModule().size(); i++) {
-                    if(2 == i || 4 == i || 7 == i ||  14 == i|| 8 == i){
+                    if (2 == i || 4 == i || 7 == i || 14 == i || 8 == i) {
                         continue;
                     }
                     moduleBean.add(recommBean.getModule().get(i));
@@ -87,5 +122,10 @@ public class RecommendFragment extends BaseFragment {
             }
         });
         VolleySington.getInstance().addRequest(gsonRequest);
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }
