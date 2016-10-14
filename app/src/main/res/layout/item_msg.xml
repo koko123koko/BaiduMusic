@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+    <!--头部-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.example.dllo.baidumusic.div.CircleImageView
+            android:id="@+id/ci_msg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+        <TextView
+            android:id="@+id/tv_msg_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/ci_msg"
+            android:text="话唠主播"
+            />
+
+        <TextView
+            android:id="@+id/tv_msg_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_msg_name"
+            android:layout_toRightOf="@id/ci_msg"
+            android:text="09-28"
+            />
+
+        <ImageButton
+            android:id="@+id/ib_msg_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            />
+
+
+    </RelativeLayout>
+    <!--内容-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_msg_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="80"
+            />
+
+    </RelativeLayout>
+    <!--话题-->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_msg_topic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+    <!--图片-->
+    <GridView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </GridView>
+    <!--音乐-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#a69e9898">
+
+        <ImageView
+            android:id="@+id/iv_msg_song"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_msg_song_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_msg_song"
+            android:text="彩虹金刚"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_msg_song_name"
+            android:layout_toRightOf="@id/iv_msg_song"
+            android:text="孙燕姿"
+            />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+        <TextView
+            android:id="@+id/shaper_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:text="3"
+            />
+
+        <TextView
+            android:id="@+id/discuss_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_toLeftOf="@id/shaper_msg"
+            android:text="评论"
+            />
+        <TextView
+            android:id="@+id/agree_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_toLeftOf="@id/discuss_msg"
+            android:text="34"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

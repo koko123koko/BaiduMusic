@@ -20,6 +20,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_item_song_list_num"
             android:layout_alignParentBottom="true"
+            android:drawableLeft="@mipmap/ic_listen_count"
+            android:drawablePadding="5dp"
             android:text="1504"
             android:layout_margin="10dp"
             android:textColor="#fff"

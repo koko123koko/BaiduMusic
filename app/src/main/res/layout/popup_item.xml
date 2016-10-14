@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+                android:layout_marginTop="80dp">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        >
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:background="#eef1f3"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:layout_height="match_parent"
+                android:background="@mipmap/bt_list_order_normal"
+
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="8"
+                android:layout_height="match_parent"
+                android:text="正在播放列表"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:text="全部清空"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lv_popup_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            >
+
+        </ListView>
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_popup_item_close"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#c7d7d4d4"
+        android:text="关闭"
+        />
+</RelativeLayout>

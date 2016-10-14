@@ -12,4 +12,27 @@
         <item name="android:windowTitleSize">50dp</item>
     </style>
 
+    <style name="common_vertical_division_line_style">
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+        <item name="android:layout_width">0.5dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">#f1f9f6f6</item>
+    </style>
+
+    <style name="common_horizontal_division_line_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">#dddddd</item>
+    </style>
+
+
+    <style name="mypopwindow_anim_style">
+        <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
+        <!-- 指定显示的动画xml -->
+
+        <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
+        <!-- 指定消失的动画xml -->
+    </style>
 </resources>

@@ -6,11 +6,11 @@ import android.support.v4.view.ViewPager;
 
 import com.example.dllo.baidumusic.Adapter.FragVPAdapter;
 import com.example.dllo.baidumusic.Base.BaseFragment;
-import com.example.dllo.baidumusic.LibsFragment.MVFragment;
-import com.example.dllo.baidumusic.LibsFragment.KMFragment;
-import com.example.dllo.baidumusic.LibsFragment.RankFragment;
-import com.example.dllo.baidumusic.LibsFragment.RecommendFragment;
-import com.example.dllo.baidumusic.LibsFragment.SongFragment;
+import com.example.dllo.baidumusic.Fragment.LibsFragment.MV.MVFragment;
+import com.example.dllo.baidumusic.Fragment.LibsFragment.KM.KMFragment;
+import com.example.dllo.baidumusic.Fragment.LibsFragment.Rank.RankFragment;
+import com.example.dllo.baidumusic.Fragment.LibsFragment.Recommed.RecommendFragment;
+import com.example.dllo.baidumusic.Fragment.LibsFragment.Song.SongFragment;
 import com.example.dllo.baidumusic.R;
 
 import java.util.ArrayList;

@@ -23,6 +23,9 @@ public class URLVlaues {
     public static final String SONGER= "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.9.0.0&channel=1413c&operator=1&method=baidu.ting.artist.getList&format=json&offset=0&limit=48&order=1&area=0&sex=0";
 
 
+    //动态
+    public static final String MSG = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.9.0.0&channel=1413c&operator=1&method=baidu.ting.ugcfriend.getList&format=json&param=bS32iGgM4i1SQku9InOVAC6atVoDR9WL19Xga9nd4aFKWufG9BF0qzMoMiDlrMISP0n87jr4b3YbIDYu1m%2B6tg%3D%3D&timestamp=1474890905&sign=1266784eee2f345d2d156459281cf76e";
+
 
     //首页轮播图url
     public static final String RECOMMAND_CAROUSE = "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.plaza.getFocusPic&format=json&from=ios&version=5.2.3&from=ios&channel=appstore";
@@ -46,5 +49,9 @@ public class URLVlaues {
     //播放页面
     public static final String PLAY_FRONT = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=webapp_music&method=baidu.ting.song.play&format=json&callback=&songid=";
     public static final String PLAY_BEHIND = "&_=1413017198449";
+
+
+//    public static final String PLAY_FRONT="http://yinyueshiting.baidu.com/data2/music/";
+//    public static final String PLAY_BEHIND="?xcode=4e5a5b6c1d884545c7d4e558c0a93524";
 
 }

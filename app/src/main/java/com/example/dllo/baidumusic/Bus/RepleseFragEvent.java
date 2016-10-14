@@ -8,6 +8,15 @@ import android.support.v4.app.Fragment;
 public class RepleseFragEvent {
 
      private Fragment fragment;
+        private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public Fragment getFragment() {
         return fragment;
@@ -16,6 +25,9 @@ public class RepleseFragEvent {
     public void setFragment(Fragment fragment) {
         this.fragment = fragment;
     }
+
+
+
 
 //    public  void repleseFrag(Fragment newFragment){
 //        FragmentManager fragmentManager = fragment.getActivity().getSupportFragmentManager();

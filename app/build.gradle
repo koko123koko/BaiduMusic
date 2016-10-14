@@ -31,4 +31,15 @@ dependencies {
     compile 'com.android.support:design:24.2.1'
     compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'org.greenrobot:eventbus:3.0.0'
+    compile files('libs/MobCommons-2016.0830.1940.jar')
+    compile files('libs/MobTools-2016.0830.1940.jar')
+    compile files('libs/ShareSDK-Core-2.7.7.jar')
+    compile files('libs/ShareSDK-Email-2.7.7.jar')
+    compile files('libs/ShareSDK-QQ-2.7.7.jar')
+    compile files('libs/ShareSDK-QZone-2.7.7.jar')
+    compile files('libs/ShareSDK-SinaWeibo-2.7.7.jar')
+    compile files('libs/ShareSDK-Wechat-2.7.7.jar')
+    compile files('libs/ShareSDK-Wechat-Core-2.7.7.jar')
+    compile files('libs/ShareSDK-Wechat-Favorite-2.7.7.jar')
+    compile files('libs/ShareSDK-Wechat-Moments-2.7.7.jar')
 }

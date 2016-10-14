@@ -485,6 +485,8 @@ public class RecommBean {
                 private int tip_type;
                 private String author;
 
+
+
                 public String getDesc() {
                     return desc;
                 }

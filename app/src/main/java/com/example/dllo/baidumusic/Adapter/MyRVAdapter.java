@@ -18,64 +18,86 @@ import android.widget.Toast;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
-import com.example.dllo.baidumusic.Bean.RecommBean;
+import com.example.dllo.baidumusic.Adapter.BAdapter.BTestAdapter;
+import com.example.dllo.baidumusic.Bean.ReommendBean.DiyBean;
+import com.example.dllo.baidumusic.Bean.ReommendBean.EntryBean;
+import com.example.dllo.baidumusic.Bean.ReommendBean.FocusBean;
+import com.example.dllo.baidumusic.Bean.ReommendBean.MixBean;
+import com.example.dllo.baidumusic.Bean.ReommendBean.ModuleBean;
+import com.example.dllo.baidumusic.Bean.ReommendBean.RadioBean;
+import com.example.dllo.baidumusic.Bean.ReommendBean.RecommBean;
+import com.example.dllo.baidumusic.Bean.ReommendBean.RecsongBean;
+import com.example.dllo.baidumusic.Bean.ReommendBean.SceneBean;
 import com.example.dllo.baidumusic.Bus.RepleseFragEvent;
+import com.example.dllo.baidumusic.Fragment.LibsFragment.Recommed.Songer.SongClassify;
+import com.example.dllo.baidumusic.Fragment.LibsFragment.Recommed.Songer.SongerFrag;
+import com.example.dllo.baidumusic.Fragment.LibsFragment.Song.SongList.SongListFrag;
 import com.example.dllo.baidumusic.R;
 import com.example.dllo.baidumusic.VolleyRequest.DisplaySingle;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
+import com.example.dllo.baidumusic.VolleyRequest.URLVlaues;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by dllo on 16/9/19.
  */
 public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnItemClickListener, View.OnClickListener {
 
-
-
-
     private RecommBean recommBean;
-    private RecommBean.ResultBean.DiyBean diyBean;
-    private RecommBean.ResultBean.Mix1Bean mix1Bean;
-    private RecommBean.ResultBean.Mix5Bean mix5Bean;
-    private RecommBean.ResultBean.Mix9Bean mix9Bean;
-    private RecommBean.ResultBean.Mix22Bean mix22Bean;
-    private RecommBean.ResultBean.Mod7Bean mod7Bean;
-    private RecommBean.ResultBean.RadioBean radioBean;
-    private RecommBean.ResultBean.RecsongBean recsongBean;
-    private RecommBean.ResultBean.SceneBean sceneBean;
-    private RecommBean.ResultBean.EntryBean entryBean;
-    private RecommBean.ResultBean.FocusBean focusBean;
-
-    private RecommBean.ResultBean.SceneBean.Scene.ActionBean actionBean;
+    //    private RecommBean.ResultBean.DiyBean diyBean;
+    //    private RecommBean.ResultBean.Mix1Bean mix1Bean;
+    //    private RecommBean.ResultBean.Mix5Bean mix5Bean;
+    //    private RecommBean.ResultBean.Mix9Bean mix9Bean;
+    //    private RecommBean.ResultBean.Mix22Bean mix22Bean;
+    //    private RecommBean.ResultBean.Mod7Bean mod7Bean;
+    //    private RecommBean.ResultBean.RadioBean radioBean;
+    //    private RecommBean.ResultBean.RecsongBean recsongBean;
+    //    private RecommBean.ResultBean.SceneBean sceneBean;
+    //    private RecommBean.ResultBean.EntryBean entryBean;
+    //    private RecommBean.ResultBean.FocusBean focusBean;
+    //    private RecommBean.ResultBean.SceneBean.Scene.ActionBean actionBean;
 
 
     private String urlStr;
-    private ArrayList<RecommBean.ModuleBean> moduleBeanArrayList;
+    private ArrayList<ModuleBean> moduleBeanArrayList;
 
     private ArrayList<String> focusArr;//轮播图
-    private ArrayList<String> entryArr;//图标
-    private ArrayList<RecommBean.ResultBean.Mix1Bean.Mix1> mix1ArrayList;
-    private ArrayList<RecommBean.ResultBean.DiyBean.Diy> diyBeanArrayList;
-    private List<RecommBean.ResultBean.Mix22Bean.Mix22> mix22List;
-    private ArrayList<RecommBean.ResultBean.RecsongBean.Recsong> recsongArrayList;
-    private ArrayList<RecommBean.ResultBean.Mix9Bean.Mix9> mix9ArrayList;
-    private ArrayList<RecommBean.ResultBean.Mix5Bean.Mix5> mix5ArrayList;
-    private ArrayList<RecommBean.ResultBean.RadioBean.Radio> radioArrayList;
-    private ArrayList<RecommBean.ResultBean.Mod7Bean.Mod7> mod7ArrayList;
-    private ArrayList<RecommBean.ResultBean.SceneBean.Scene.ActionBean> actionBeanArrayList;
-    private ArrayList<RecommBean.ResultBean.SceneBean.Scene.EmotionBean> emotionBeanArrayList;
-    private ArrayList<RecommBean.ResultBean.SceneBean.Scene.OperationBean> operationBeanArrayList;
-    private ArrayList<RecommBean.ResultBean.SceneBean.Scene.OtherBean> otherBeanArrayList;
+
+    //    private ArrayList<String> entryArr;//图标
+    //    private ArrayList<RecommBean.ResultBean.Mix1Bean.Mix1> mix1ArrayList;
+    //    private ArrayList<RecommBean.ResultBean.DiyBean.Diy> diyBeanArrayList;
+    //    private List<RecommBean.ResultBean.Mix22Bean.Mix22> mix22List;
+    //    private ArrayList<RecommBean.ResultBean.RecsongBean.Recsong> recsongArrayList;
+    //    private ArrayList<RecommBean.ResultBean.Mix9Bean.Mix9> mix9ArrayList;
+    //    private ArrayList<RecommBean.ResultBean.Mix5Bean.Mix5> mix5ArrayList;
+    //    private ArrayList<RecommBean.ResultBean.RadioBean.Radio> radioArrayList;
+    //    private ArrayList<RecommBean.ResultBean.Mod7Bean.Mod7> mod7ArrayList;
+    //    private ArrayList<RecommBean.ResultBean.SceneBean.Scene.ActionBean> actionBeanArrayList;
+    //    private ArrayList<RecommBean.ResultBean.SceneBean.Scene.EmotionBean> emotionBeanArrayList;
+    //    private ArrayList<RecommBean.ResultBean.SceneBean.Scene.OperationBean> operationBeanArrayList;
+    //    private ArrayList<RecommBean.ResultBean.SceneBean.Scene.OtherBean> otherBeanArrayList;
+
+    private RepleseFragEvent event;
+    private DiyBean diyBean;
+    private EntryBean entryBean;
+    private FocusBean focusBean;
+    private RadioBean radioBean;
+    private RecsongBean recsongBean;
+    private SceneBean sceneBean;
+    private MixBean mix1;
+    private MixBean mix5;
+    private MixBean mix9;
+    private MixBean mix22;
+    private MixBean mod7;
+    private MixBean mod26;
+    private MixBean adsmall;
 
     //    private ImageLoader imageLoader;
     //    private final DisplayImageOptions options;
 
-    public void setModuleBeanArrayList(ArrayList<RecommBean.ModuleBean> moduleBeanArrayList) {
+    public void setModuleBeanArrayList(ArrayList<ModuleBean> moduleBeanArrayList) {
         this.moduleBeanArrayList = moduleBeanArrayList;
         Log.d("MyRVAdapter", "moduleBeanArrayList:" + moduleBeanArrayList);
         notifyDataSetChanged();
@@ -95,6 +117,7 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
 
     public MyRVAdapter(Context context) {
         this.context = context;
+        event = new RepleseFragEvent();
 
 
     }
@@ -107,90 +130,105 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
     }
 
     private void init() {
-        this.entryBean = recommBean.getResult().getEntry();
-        this.focusBean = recommBean.getResult().getFocus();
-        this.diyBean = recommBean.getResult().getDiy();
-        this.mix1Bean = recommBean.getResult().getMix_1();
-        this.mix5Bean = recommBean.getResult().getMix_5();
-        this.mix9Bean = recommBean.getResult().getMix_9();
-        this.mix22Bean = recommBean.getResult().getMix_22();
-        this.mod7Bean = recommBean.getResult().getMod_7();
-        this.radioBean = recommBean.getResult().getRadio();
-        this.recsongBean = recommBean.getResult().getRecsong();
-        this.sceneBean = recommBean.getResult().getScene();
+
+        diyBean = recommBean.getResult().getDiy();
+        entryBean = recommBean.getResult().getEntry();
+        focusBean = recommBean.getResult().getFocus();
+        radioBean = recommBean.getResult().getRadio();
+        recsongBean = recommBean.getResult().getRecsong();
+        sceneBean = recommBean.getResult().getScene();
+        mix1 = recommBean.getResult().getMix_1();
+        mix5 = recommBean.getResult().getMix_5();
+        mix9 = recommBean.getResult().getMix_9();
+        mix22 = recommBean.getResult().getMix_22();
+        mod7 = recommBean.getResult().getMod_7();
+        mod26 = recommBean.getResult().getMod_26();
+        adsmall = recommBean.getResult().getAd_small();
+
+        //        this.entryBean = recommBean.getResult().getEntry();
+        //        this.focusBean = recommBean.getResult().getFocus();
+        //        this.diyBean = recommBean.getResult().getDiy();
+        //        this.mix1Bean = recommBean.getResult().getMix_1();
+        //        this.mix5Bean = recommBean.getResult().getMix_5();
+        //        this.mix9Bean = recommBean.getResult().getMix_9();
+        //        this.mix22Bean = recommBean.getResult().getMix_22();
+        //        this.mod7Bean = recommBean.getResult().getMod_7();
+        //        this.radioBean = recommBean.getResult().getRadio();
+        //        this.recsongBean = recommBean.getResult().getRecsong();
+        //        this.sceneBean = recommBean.getResult().getScene();
 
         //1
-        entryArr = new ArrayList<>();
-        for (int i = 0; i < entryBean.getResult().size(); i++) {
-            entryArr.add(entryBean.getResult().get(i).getIcon());
-        }
-
+        //        entryArr = new ArrayList<>();
+        //        for (int i = 0; i < entryBean.getResult().size(); i++) {
+        //            entryArr.add(entryBean.getResult().get(i).getIcon());
+        //        }
+        //
         //2
         focusArr = new ArrayList<>();
         for (int i = 0; i < focusBean.getResult().size(); i++) {
             focusArr.add(focusBean.getResult().get(i).getRandpic());
         }
-        //4
-        diyBeanArrayList = new ArrayList<>();
-        for (int i = 0; i < diyBean.getResult().size(); i++) {
-            diyBeanArrayList.add(diyBean.getResult().get(i));
-        }
-        //6
-        mix1ArrayList = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            mix1ArrayList.add(mix1Bean.getResult().get(i));
-
-        }
-        //7
-        mix22List = new ArrayList<>();
-        for (int i = 0; i < mix22Bean.getResult().size(); i++) {
-            mix22List.add(mix22Bean.getResult().get(i));
-        }
-
-        //8
-        actionBeanArrayList = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            actionBeanArrayList.add(sceneBean.getResult().getAction().get(i));
-        }
-        //        emotionBeanArrayList = new ArrayList<>();
-        //        for (int i = 0; i < sceneBean.getResult().getAction().size(); i++) {
-        //            emotionBeanArrayList.add(sceneBean.getResult().getEmotion().get(i));
+        //        //4
+        //        diyBeanArrayList = new ArrayList<>();
+        //        for (int i = 0; i < diyBean.getResult().size(); i++) {
+        //            diyBeanArrayList.add(diyBean.getResult().get(i));
         //        }
-        //        operationBeanArrayList = new ArrayList<>();
-        //        for (int i = 0; i < sceneBean.getResult().getAction().size(); i++) {
-        //            operationBeanArrayList.add(sceneBean.getResult().getOperation().get(i));
+        //        //6
+        //        mix1ArrayList = new ArrayList<>();
+        //        for (int i = 0; i < 6; i++) {
+        //            mix1ArrayList.add(mix1Bean.getResult().get(i));
+        //
         //        }
-        //        otherBeanArrayList = new ArrayList<>();
-        //        for (int i = 0; i < sceneBean.getResult().getAction().size(); i++) {
-        //            otherBeanArrayList.add(sceneBean.getResult().getOther().get(i));
+        //        //7
+        //        mix22List = new ArrayList<>();
+        //        for (int i = 0; i < mix22Bean.getResult().size(); i++) {
+        //            mix22List.add(mix22Bean.getResult().get(i));
         //        }
-
-
-        //10
-        recsongArrayList = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            recsongArrayList.add(recsongBean.getResult().get(i));
-        }
-        //11
-        mix9ArrayList = new ArrayList<>();
-        for (int i = 0; i < mix9Bean.getResult().size(); i++) {
-            mix9ArrayList.add(mix9Bean.getResult().get(i));
-        }
-        //12
-        mix5ArrayList = new ArrayList<>();
-        for (int i = 0; i < mix5Bean.getResult().size(); i++) {
-            mix5ArrayList.add(mix5Bean.getResult().get(i));
-        }
-        //13
-        radioArrayList = new ArrayList<>();
-        for (int i = 0; i < radioBean.getResult().size(); i++) {
-            radioArrayList.add(radioBean.getResult().get(i));
-        }
-        //14
-        mod7ArrayList = new ArrayList<>();
-        for (int i = 0; i < mod7Bean.getResult().size(); i++) {
-            mod7ArrayList.add(mod7Bean.getResult().get(i));
-        }
+        //
+        //        //8
+        //        actionBeanArrayList = new ArrayList<>();
+        //        for (int i = 0; i < 4; i++) {
+        //            actionBeanArrayList.add(sceneBean.getResult().getAction().get(i));
+        //        }
+        //        //        emotionBeanArrayList = new ArrayList<>();
+        //        //        for (int i = 0; i < sceneBean.getResult().getAction().size(); i++) {
+        //        //            emotionBeanArrayList.add(sceneBean.getResult().getEmotion().get(i));
+        //        //        }
+        //        //        operationBeanArrayList = new ArrayList<>();
+        //        //        for (int i = 0; i < sceneBean.getResult().getAction().size(); i++) {
+        //        //            operationBeanArrayList.add(sceneBean.getResult().getOperation().get(i));
+        //        //        }
+        //        //        otherBeanArrayList = new ArrayList<>();
+        //        //        for (int i = 0; i < sceneBean.getResult().getAction().size(); i++) {
+        //        //            otherBeanArrayList.add(sceneBean.getResult().getOther().get(i));
+        //        //        }
+        //
+        //
+        //        //10
+        //        recsongArrayList = new ArrayList<>();
+        //        for (int i = 0; i < 3; i++) {
+        //            recsongArrayList.add(recsongBean.getResult().get(i));
+        //        }
+        //        //11
+        //        mix9ArrayList = new ArrayList<>();
+        //        for (int i = 0; i < mix9Bean.getResult().size(); i++) {
+        //            mix9ArrayList.add(mix9Bean.getResult().get(i));
+        //        }
+        //        //12
+        //        mix5ArrayList = new ArrayList<>();
+        //        for (int i = 0; i < mix5Bean.getResult().size(); i++) {
+        //            mix5ArrayList.add(mix5Bean.getResult().get(i));
+        //        }
+        //        //13
+        //        radioArrayList = new ArrayList<>();
+        //        for (int i = 0; i < radioBean.getResult().size(); i++) {
+        //            radioArrayList.add(radioBean.getResult().get(i));
+        //        }
+        //        //14
+        //        mod7ArrayList = new ArrayList<>();
+        //        for (int i = 0; i < mod7Bean.getResult().size(); i++) {
+        //            mod7ArrayList.add(mod7Bean.getResult().get(i));
+        //        }
     }
 
 
@@ -203,9 +241,7 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-
         switch (viewType) {
-
 
             //            case 3:
             //            case 5:
@@ -250,9 +286,10 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
         return new Mix1ViewHolder(view);
     }
 
+    int i = 0;
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
 
         int num = getItemViewType(position);
         switch (num) {
@@ -277,16 +314,15 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
                 break;
             case 2:
                 EntryViewHolder entryViewHolder = (EntryViewHolder) holder;
-                if (entryBean != null) {
+                if (entryBean.getResult() != null) {
                     //                    imageLoader.displayImage(entryArr.get(0),entryViewHolder.allSong);
                     //                    imageLoader.displayImage(entryArr.get(1),entryViewHolder.classify);
                     //                    imageLoader.displayImage(entryArr.get(2),entryViewHolder.btnCommand);
                     //                    imageLoader.displayImage(entryArr.get(3),entryViewHolder.vip);
-                    DisplaySingle.getInstance().show(entryArr.get(0), entryViewHolder.allSong);
-                    DisplaySingle.getInstance().show(entryArr.get(1), entryViewHolder.classify);
-                    DisplaySingle.getInstance().show(entryArr.get(2), entryViewHolder.btnCommand);
-                    DisplaySingle.getInstance().show(entryArr.get(3), entryViewHolder.vip);
-
+                    DisplaySingle.getInstance().show(entryBean.getResult().get(0).getIcon(), entryViewHolder.allSong);
+                    DisplaySingle.getInstance().show(entryBean.getResult().get(1).getIcon(), entryViewHolder.classify);
+                    DisplaySingle.getInstance().show(entryBean.getResult().get(2).getIcon(), entryViewHolder.btnCommand);
+                    DisplaySingle.getInstance().show(entryBean.getResult().get(3).getIcon(), entryViewHolder.vip);
 
                     entryViewHolder.allSong.setOnClickListener(this);
                     entryViewHolder.classify.setOnClickListener(this);
@@ -297,35 +333,35 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
                 }
                 break;
             case 4:
-                BTestAdapter diyBaseAdapter = new BTestAdapter(context, diyBeanArrayList);
+                BTestAdapter diyBaseAdapter = new BTestAdapter(context, diyBean.getResult());
                 show((Mix1ViewHolder) holder, diyBaseAdapter, num, position);
                 break;
             case 6:
-                BTestAdapter mix1BaseAdapter = new BTestAdapter(context, mix1ArrayList);
+                BTestAdapter mix1BaseAdapter = new BTestAdapter(context, mix1.getResult().subList(0, 6));
                 show((Mix1ViewHolder) holder, mix1BaseAdapter, num, position);
                 break;
             case 7:
-                BTestAdapter bTestAdapter = new BTestAdapter(context, mix22List);
+                BTestAdapter bTestAdapter = new BTestAdapter(context, mix22.getResult());
                 show((Mix1ViewHolder) holder, bTestAdapter, num, position);
                 break;
             case 10:
-                BTestAdapter recsongAdapter = new BTestAdapter(context, recsongArrayList);
+                BTestAdapter recsongAdapter = new BTestAdapter(context, recsongBean.getResult().subList(0, 3));
                 show((Mix1ViewHolder) holder, recsongAdapter, num, position);
                 break;
             case 11:
-                BTestAdapter mix9BaseAdapter = new BTestAdapter(context, mix9ArrayList);
+                BTestAdapter mix9BaseAdapter = new BTestAdapter(context, mix9.getResult());
                 show((Mix1ViewHolder) holder, mix9BaseAdapter, num, position);
                 break;
             case 12:
-                BTestAdapter mix5BaseAdapter = new BTestAdapter(context, mix5ArrayList);
+                BTestAdapter mix5BaseAdapter = new BTestAdapter(context, mix5.getResult());
                 show((Mix1ViewHolder) holder, mix5BaseAdapter, num, position);
                 break;
             case 13:
-                BTestAdapter radioBaseAdapter = new BTestAdapter(context, radioArrayList);
+                BTestAdapter radioBaseAdapter = new BTestAdapter(context, radioBean.getResult());
                 show((Mix1ViewHolder) holder, radioBaseAdapter, num, position);
                 break;
             case 14:
-                BTestAdapter mod7Adapter = new BTestAdapter(context, mod7ArrayList);
+                BTestAdapter mod7Adapter = new BTestAdapter(context, mod7.getResult());
                 show((Mix1ViewHolder) holder, mod7Adapter, num, position);
                 break;
 
@@ -336,12 +372,14 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
 
     void show(Mix1ViewHolder holder, BTestAdapter testAdapter, int pos, int position) {
         testAdapter.setPos(pos);
+
         holder.gv.setAdapter(testAdapter);
         holder.gv.setOnItemClickListener(this);
-        holder.gv.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), false, true));
+        holder.gv.setId(i++);
+        //        holder.gv.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), false, true));
         ViewGroup.LayoutParams layoutParams = holder.gv.getLayoutParams();
         if (pos == 14) {
-            layoutParams.height = 500;
+            layoutParams.height = 680;
             holder.gv.setLayoutParams(layoutParams);
             holder.gv.setNumColumns(1);
         }
@@ -371,32 +409,78 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
         return moduleBeanArrayList == null ? 0 : moduleBeanArrayList.size();
     }
 
+
+    private MyInterface myInterface;
+
+    public MyInterface getMyInterface() {
+        return myInterface;
+    }
+
+    public void setMyInterface(MyInterface myInterface) {
+        this.myInterface = myInterface;
+    }
+
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(context, "hehe" + i, Toast.LENGTH_SHORT).show();
+        //        Toast.makeText(context, "hehe" + i, Toast.LENGTH_SHORT).show();
+
+
+        //
+        //        Log.d("MyRVAdapter", "view:" + view.getTag());
+        //        Log.d("MyRVAdapter", "adapterView:" + adapterView.getTag());
+        //        Log.d("MyRVAdapter", "i:" + i);
+        //        Log.d("MyRVAdapter", "l:" + l);
+        //        Log.d("MyRVAdapter", "getViewHolder(adapterView):" + getViewHolder(adapterView));
+        //        Log.d("MyRVAdapter", "getViewHolder(adapterView):" + getViewHolder(adapterView).hashCode());
+        //        Log.d("MyRVAdapter", "getViewHolder(adapterView):" + getViewHolder(adapterView).getItemId());
+        TextView textView = (TextView) view.findViewById(R.id.tv_item_base_listId);
+        String tvUrl = URLVlaues.SONGLIST_DETAIL_Front + textView.getText() + URLVlaues.SONGLIST_DETAIL_BEHIND;
+
+        switch (adapterView.getId()) {
+            case 0:
+                Log.d("MyRVAdapter", tvUrl);
+
+                SongListFrag songListFrag = new SongListFrag();
+                songListFrag.setUrl(tvUrl);
+                event.setFragment(songListFrag);
+                EventBus.getDefault().post(event);
+                break;
+            case 1:
+                Log.d("MyRVAdapter", textView.getText().toString());
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+        }
+
+
+
     }
 
     @Override
     public void onClick(View view) {
 
-
-        RepleseFragEvent event = new RepleseFragEvent();
-
         switch (view.getId()) {
 
             case R.id.ibtn_item_adv_all:
 
-//                MainActivity.repleseFrag(new SongerFrag());
+                //                MainActivity.repleseFrag(new SongerFrag());
 
-//                Toast.makeText(context, "歌手", Toast.LENGTH_SHORT).show();
-
+                //                Toast.makeText(context, "歌手", Toast.LENGTH_SHORT).show();
 
                 event.setFragment(new SongerFrag());
                 EventBus.getDefault().post(event);
 
                 break;
             case R.id.ibtn_item_adv_classify:
-//                Toast.makeText(context, "歌曲分类", Toast.LENGTH_SHORT).show();
+                //                Toast.makeText(context, "歌曲分类", Toast.LENGTH_SHORT).show();
                 event.setFragment(new SongClassify());
                 EventBus.getDefault().post(event);
 

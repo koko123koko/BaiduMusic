@@ -33,9 +33,9 @@ public class DisplaySingle {
     public void show(String uri, ImageView imageView) {
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .showImageForEmptyUri(R.mipmap.default_album_bg)
-                .showImageOnLoading(R.mipmap.default_album_bg)
-                .showImageOnFail(R.mipmap.default_album_bg)
+                .showImageForEmptyUri(R.mipmap.default_newalbum)
+                .showImageOnLoading(R.mipmap.default_newalbum)
+                .showImageOnFail(R.mipmap.default_newalbum)
                 .resetViewBeforeLoading(true)
                 .cacheOnDisk(true)
                 .imageScaleType(ImageScaleType.EXACTLY)
@@ -43,7 +43,7 @@ public class DisplaySingle {
                 .considerExifParams(true)
                 .displayer(new FadeInBitmapDisplayer(300))
                 .build();
-        ImageLoader.getInstance().displayImage(uri, imageView);
+        ImageLoader.getInstance().displayImage(uri, imageView,options);
     }
 
 //    public void repleseFrag(Fragment fragment){
