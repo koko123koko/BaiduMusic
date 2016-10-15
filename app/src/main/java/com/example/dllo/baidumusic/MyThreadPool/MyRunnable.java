@@ -25,9 +25,12 @@ public class MyRunnable implements Runnable{
 
     private SongInfoBean songInfoBean;
 
+    private int i;
+
     public MyRunnable(String url, Handler handler) {
         this.url = url;
         this.handler = handler;
+//        this.i = i;
     }
 
     @Override
@@ -56,6 +59,7 @@ public class MyRunnable implements Runnable{
 
                 Message message = new Message();
                 message.arg1 = 101;
+//                message.arg2 = i;
                 message.obj = songInfoBean;
                 handler.sendMessage(message);
 

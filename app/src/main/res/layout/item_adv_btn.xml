@@ -4,7 +4,9 @@
               android:layout_width="match_parent"
 
               android:layout_height="150dp"
-              android:orientation="vertical">
+              android:orientation="vertical"
+
+    >
 
     <com.bigkoo.convenientbanner.ConvenientBanner
         android:id="@+id/frag_recommend_cb"
@@ -12,9 +14,7 @@
         android:layout_height="150dp"
         app:canLoop="true"
 
-
         >
-
 
     </com.bigkoo.convenientbanner.ConvenientBanner>
 

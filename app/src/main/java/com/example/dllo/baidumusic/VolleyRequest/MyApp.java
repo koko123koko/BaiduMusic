@@ -12,6 +12,9 @@ import com.nostra13.universalimageloader.utils.StorageUtils;
 
 import java.io.File;
 
+import cn.jpush.android.api.JPushInterface;
+import cn.sharesdk.framework.ShareSDK;
+
 /**
  * Created by dllo on 16/9/20.
  */
@@ -22,6 +25,10 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         context = this;
+        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);     		// 初始化 JPush
+
+
         File cacheDir = StorageUtils.getOwnCacheDirectory(this,"imageLoader/Cache",true);
         ImageLoaderConfiguration configuration =
                 new ImageLoaderConfiguration

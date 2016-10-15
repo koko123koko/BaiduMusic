@@ -66,6 +66,7 @@ public class SoundService extends Service implements SoundServiceInterface {
     }
 
     public synchronized void playNext() {
+        Log.d("SoundService", "mPosition:" + mPosition);
         if ((mPosition + 1) == songInfoBeanList.size()) {
             mPosition = 0;
         } else {
@@ -219,8 +220,9 @@ public class SoundService extends Service implements SoundServiceInterface {
         try {
             mediaPlayer.reset();
             mediaPlayer.setDataSource(this, Uri.parse(file_link));
-            mediaPlayer.prepareAsync();
-
+//            mediaPlayer.prepareAsync();
+            mediaPlayer.prepare();
+            mediaPlayer.start();
         } catch (IOException e) {
             e.printStackTrace();
         }

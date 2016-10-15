@@ -1,14 +1,10 @@
 package com.example.dllo.baidumusic.Fragment.LibsFragment.Song.SongList;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
 import android.os.Parcelable;
 import android.renderscript.Allocation;
 import android.renderscript.Element;
@@ -25,9 +21,8 @@ import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.dllo.baidumusic.Base.BaseFragment;
-import com.example.dllo.baidumusic.MyThreadPool.MyPool;
-import com.example.dllo.baidumusic.MyThreadPool.MyRunnable;
 import com.example.dllo.baidumusic.R;
 import com.example.dllo.baidumusic.Service.SoundService;
 import com.example.dllo.baidumusic.VolleyRequest.DisplaySingle;
@@ -35,10 +30,14 @@ import com.example.dllo.baidumusic.VolleyRequest.GsonRequest;
 import com.example.dllo.baidumusic.VolleyRequest.URLVlaues;
 import com.example.dllo.baidumusic.VolleyRequest.VolleySington;
 import com.example.dllo.baidumusic.div.CircleImageView;
+import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 /**
  * Created by dllo on 16/10/8.
@@ -65,6 +64,7 @@ public class SongListFrag extends BaseFragment {
 
     private ServiceConnection serviceConnection;
     private boolean mBound = false;
+    private TextView share;
 
 
     public String getUrl() {
@@ -73,6 +73,7 @@ public class SongListFrag extends BaseFragment {
 
     public void setUrl(String url) {
         Url = url;
+
     }
 
 
@@ -82,7 +83,7 @@ public class SongListFrag extends BaseFragment {
 
         sendGet();
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-
+        ShareSDK.initSDK(getContext());
         //        iv.setImageBitmap();
         //        Bitmap backgroud = changeBackgroundImage(bitmap);
         //        Drawable drawable = new BitmapDrawable(backgroud);
@@ -107,6 +108,12 @@ public class SongListFrag extends BaseFragment {
         //
         //        Drawable drawable =iv.getDrawable();
         //        fl.setBackground(drawable);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showShare();
+            }
+        });
 
 
     }
@@ -131,7 +138,11 @@ public class SongListFrag extends BaseFragment {
         tag = bindView(R.id.tv_item_song_list_frag_tag);
         title = bindView(R.id.tv_item_song_list_frag_title);
 
+        share = bindView(R.id.tv_item_song_list_share_playlist);
+
         rv.setItemAnimator(new DefaultItemAnimator());
+
+//        ShareSDK.initSDK(mContext,"d6a1118259c4b383e93ca11f");
 
     }
 
@@ -156,39 +167,63 @@ public class SongListFrag extends BaseFragment {
         }
         return null;
     }
-
+    private SongListBean songListBean;
     private void sendGet() {
         //        String url = URLVlaues.SONG_HOT;
         Log.d("RecommendFragment", "sendGet");
         GsonRequest<SongListBean> gsonRequest = new GsonRequest<SongListBean>(Url, SongListBean.class, new Response.Listener<SongListBean>() {
 
+
+            private int i;
             private List<SongInfoBean> songInfoBeanList;
 
             @Override
             public void onResponse(final SongListBean response) {
                 //
 
+                songListBean =  response;
                 songInfoBeanList = new ArrayList<>();
-                for (int i = 0; i < response.getContent().size(); i++) {
+                for (i = 0; i < response.getContent().size(); i++) {
 
                     String songId = response.getContent().get(i).getSong_id();
                     String url = URLVlaues.PLAY_FRONT + songId + URLVlaues.PLAY_BEHIND;
-                    Handler handler = new Handler() {
+
+                    StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
                         @Override
-                        public void handleMessage(Message msg) {
-                            super.handleMessage(msg);
-
-
-                            if (msg.arg1 == 101) {
-
-                                SongInfoBean songInfoBean = (SongInfoBean) msg.obj;
-                                songInfoBeanList.add(songInfoBean);
-                            }
+                        public void onResponse(String response) {
+                            response = response.substring(1, response.length() - 2);
+                            Gson gson = new Gson();
+                            SongInfoBean songInfoBean = gson.fromJson(response,SongInfoBean.class);
+                            songInfoBeanList.add(songInfoBean);
 
                         }
-                    };
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
 
-                    MyPool.getInstance().getExecutorService().execute(new MyRunnable(url, handler));
+                        }
+                    });
+
+                    VolleySington.getInstance().addRequest(stringRequest);
+
+//                    Handler handler = new Handler() {
+//
+//
+//                        @Override
+//                        public void handleMessage(Message msg) {
+//                            super.handleMessage(msg);
+//
+//
+//                            if (msg.arg1 == 101 ) {
+//
+//                                SongInfoBean songInfoBean = (SongInfoBean) msg.obj;
+//                                songInfoBeanList.add(songInfoBean);
+//                            }
+//
+//                        }
+//                    };
+//
+//                    MyPool.getInstance().getExecutorService().execute(new MyRunnable(url, handler));
                 }
 
                 title.setText(response.getTitle());
@@ -201,6 +236,7 @@ public class SongListFrag extends BaseFragment {
                 iv.setImageBitmap(back);
 
                 SongListAdapter songListAdapter = new SongListAdapter(mContext);
+
                 songListAdapter.setContentBeen((ArrayList<SongListBean.ContentBean>) response.getContent());
                 final LinearLayoutManager manager = new LinearLayoutManager(mContext);
 
@@ -227,8 +263,12 @@ public class SongListFrag extends BaseFragment {
                     }
                 });
 
-
+//                View footView = LayoutInflater.from(mContext).inflate(R.layout.item_list_foot,null);
+//
+//                songListAdapter.setFootView(footView);
                 rv.setLayoutManager(manager);
+
+
                 rv.setAdapter(songListAdapter);
 
 
@@ -243,40 +283,40 @@ public class SongListFrag extends BaseFragment {
 
     }
 
-    private void bindMusicService() {
 
-
-
-
-//        defineServiceConnection();
-//        Intent intent = new Intent(mContext, MusicplayerService.class);
-//
-//        mContext.bindService(intent, serviceConnection , Context.BIND_AUTO_CREATE);
-
-
-    }
-
-    private void defineServiceConnection() {
-
-        serviceConnection = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder service) {
-
-                mBound = true;
-
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-
-            }
-        };
-
-    }
 
     @Override
     public void onDestroy() {
 
         super.onDestroy();
+    }
+
+    private void showShare() {
+        ShareSDK.initSDK(getContext());
+        OnekeyShare oks = new OnekeyShare();
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
+
+        if(songListBean != null) {
+            // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间等使用
+            oks.setTitle(songListBean.getTitle());
+            // titleUrl是标题的网络链接，QQ和QQ空间等使用
+            oks.setTitleUrl(songListBean.getUrl());
+            // text是分享文本，所有平台都需要这个字段
+            oks.setText(songListBean.getDesc());
+            // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+            //oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+            // url仅在微信（包括好友和朋友圈）中使用
+            oks.setUrl(songListBean.getPic_300());
+            // comment是我对这条分享的评论，仅在人人网和QQ空间使用
+            oks.setComment("我是测试评论文本");
+            // site是分享此内容的网站名称，仅在QQ空间使用
+            oks.setSite(getString(R.string.app_name));
+            // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+            oks.setSiteUrl(songListBean.getUrl());
+
+            // 启动分享GUI
+            oks.show(getContext());
+        }
     }
 }

@@ -35,6 +35,7 @@ import com.example.dllo.baidumusic.Fragment.LiveFragment;
 import com.example.dllo.baidumusic.Fragment.MSGFragment;
 import com.example.dllo.baidumusic.Fragment.MusicFragment;
 import com.example.dllo.baidumusic.Fragment.MyFragment;
+import com.example.dllo.baidumusic.LRC.LRCFrag;
 import com.example.dllo.baidumusic.Service.SoundService;
 import com.example.dllo.baidumusic.Service.SoundServiceBinder;
 import com.example.dllo.baidumusic.Service.SoundServiceBinderCallBack;
@@ -46,6 +47,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.sharesdk.framework.ShareSDK;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -125,6 +128,29 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         }
 
+        ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, LRCArt.class);
+//                intent.putExtra("songInfoBean", currentSong);
+//                startActivity(intent);
+                LRCFrag lrcFrag = new LRCFrag();
+                InfoBeanEvent event = new InfoBeanEvent();
+                event.setSongInfoBeanList(songs);
+                EventBus.getDefault().post(event);
+
+
+                FragmentManager manager = getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.setCustomAnimations(R.anim.popshow_anim, R.anim.pophidden_anim);
+                transaction.replace(R.id.fl_main_aty, lrcFrag);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+
+            }
+        });
+
     }
 
     @Override
@@ -141,6 +167,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         ll = (RelativeLayout) findViewById(R.id.main_ll);
 
+        ShareSDK.initSDK(this, "d6a1118259c4b383e93ca11f");
 
         EventBus.getDefault().register(this);
 
@@ -151,8 +178,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        if (mSoundService != null)
-            stopService(new Intent(MainActivity.this, SoundService.class));
+        //        if (mSoundService != null)
+        //            stopService(new Intent(MainActivity.this, SoundService.class));
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -179,14 +206,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
 
+
+
     public void repleseFrag(Fragment fragment) {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        //        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 
+        transaction.setCustomAnimations(R.anim.popshow_anim, R.anim.pophidden_anim);
         transaction.replace(R.id.item_main_fl, fragment);
-
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -200,8 +229,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onPause() {
         super.onPause();
-        if (mServiceConnection != null && mSoundService != null)
-            unbindService(mServiceConnection);
+        //        if (mServiceConnection != null && mSoundService != null)
+        //            unbindService(mServiceConnection);
     }
 
     @Override
@@ -212,11 +241,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 Log.d("MainActivity", "main_ibtn_next");
                 if (mSoundService == null) {
                     // 将 currentPosition 增加1，如果到 list 尾就返回第一个
-                    if (currentPosition == (songs.size() - 1))
-                        currentPosition = 0;
-                    else
-                        currentPosition++;
-                    bindMusicService();
+                    //                    bindMusicService();
+                    //                    if (currentPosition == (songs.size() - 1)) {
+                    //                        currentPosition = 0;
+                    //                    }
+                    //                    else {
+                    //                        currentPosition++;
+                    //                    }
                     return;
                 }
                 if (mBound) {
@@ -243,7 +274,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     }
                 }
 
-
                 break;
             case R.id.main_ibtn_playinglist:
                 showPopupWindow();
@@ -255,7 +285,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         defineServiceConnection();
         Intent intent = new Intent(MainActivity.this, SoundService.class);
         bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
-
+        //        startService(intent);
     }
 
     private void defineServiceConnection() {
@@ -349,7 +379,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         View view = LayoutInflater.from(this).inflate(R.layout.popup_item, null);
 
-        PopupWindow window = new PopupWindow(view,
+        final PopupWindow window = new PopupWindow(view,
                 WindowManager.LayoutParams.MATCH_PARENT,
                 1000, true);
 
@@ -370,12 +400,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         lv = (ListView) view.findViewById(R.id.lv_popup_item);
 
-        btnClose = (Button)view.findViewById(R.id.btn_popup_item_close);
+        btnClose = (Button) view.findViewById(R.id.btn_popup_item_close);
 
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //                onBackPressed();
+                window.dismiss();
             }
         });
 
@@ -383,6 +414,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         popupAdapter.setSongInfoBeanArrayList((ArrayList<SongInfoBean>) songs);
         lv.setAdapter(popupAdapter);
+
+        View footView = LayoutInflater.from(this).inflate(R.layout.item_list_foot, null);
+        footView.setMinimumHeight(100);
+        lv.addFooterView(footView);
 
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override

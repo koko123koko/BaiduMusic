@@ -7,158 +7,169 @@
     tools:context="com.example.dllo.baidumusic.MainActivity">
 
     <FrameLayout
-        android:id="@+id/item_main_fl"
+        android:id="@+id/fl_main_aty"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent">
 
-        >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <include layout="@layout/item_tab"/>
-
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/main_vp"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="10"
-
-                    >
-                </android.support.v4.view.ViewPager>
-
-            </LinearLayout>
-        </RelativeLayout>
-    </FrameLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/main_ll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#d1ffffff"
-        android:clickable="true"
-
-        >
-
-
-        <LinearLayout
-
-            android:id="@+id/ll_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
             <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:id="@+id/item_main_fl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
 
-                <ImageView
-                    android:background="@mipmap/ic_launcher"
-                    android:id="@+id/main_iv"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"/>
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/item_tab"/>
+
+                        <android.support.v4.view.ViewPager
+                            android:id="@+id/main_vp"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="10"
+
+                            >
+                        </android.support.v4.view.ViewPager>
+
+                    </LinearLayout>
+                </RelativeLayout>
             </FrameLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/main_tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/main_iv"
-                    android:text="各自远洋"
-                    android:layout_margin="5dp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    />
-
-                <TextView
-                    android:id="@+id/main_tv_author_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/main_tv_name"
-                    android:layout_toRightOf="@id/main_iv"
-                    android:text="中孝介"
-                    android:layout_marginLeft="5dp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
+            <RelativeLayout
+                android:id="@+id/main_ll"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:orientation="horizontal">
+                android:layout_alignParentBottom="true"
+                android:background="#d1ffffff"
+                android:clickable="true"
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp">
-                <ImageButton
-                    android:id="@+id/main_ibtn_next"
+                >
+
+
+                <LinearLayout
+
+                    android:id="@+id/ll_main"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@mipmap/bt_minibar_next_normal"
-                    android:scaleType="center"
-                    />
-                </RelativeLayout>
+                    android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp">
-                    <ImageButton
-                        android:id="@+id/main_ibtn_play"
-                        android:layout_width="match_parent"
+                    <FrameLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@mipmap/bt_minibar_play_normal"
-                        android:scaleType="center"
-                        />
-                </RelativeLayout>
+                        android:layout_weight="1">
 
+                        <ImageView
+                            android:id="@+id/main_iv"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@mipmap/ic_launcher"/>
+                    </FrameLayout>
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp">
-                    <ImageButton
-                        android:id="@+id/main_ibtn_playinglist"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/main_tv_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_toRightOf="@id/main_iv"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="各自远洋"
+                            />
+
+                        <TextView
+                            android:id="@+id/main_tv_author_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/main_tv_name"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@id/main_iv"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="中孝介"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:background="@mipmap/bt_minibar_playinglist_normal"
-                        android:scaleType="center"
-                        />
-                </RelativeLayout>
+                        android:layout_weight="3"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:id="@+id/main_ibtn_next"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:background="@mipmap/bt_minibar_next_normal"
+                                android:scaleType="center"
+                                />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:id="@+id/main_ibtn_play"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:background="@mipmap/bt_minibar_play_normal"
+                                android:scaleType="center"
+                                />
+                        </RelativeLayout>
 
 
-            </LinearLayout>
-        </LinearLayout>
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1">
 
+                            <ImageButton
+                                android:id="@+id/main_ibtn_playinglist"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:background="@mipmap/bt_minibar_playinglist_normal"
+                                android:scaleType="center"
+                                />
+                        </RelativeLayout>
 
-
-    </RelativeLayout>
-
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+    </FrameLayout>
 
 </RelativeLayout>

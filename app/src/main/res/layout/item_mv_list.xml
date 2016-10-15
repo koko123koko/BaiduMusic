@@ -1,38 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="wrap_content"
-              android:layout_height="wrap_content">
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
 
-<RelativeLayout
-    android:layout_width="180dp"
-    android:layout_height="80dp">
-    <ImageView
-        android:id="@+id/iv_mv_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:background="@drawable/pic_bg"
-        />
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="180dp"
+        android:layout_height="80dp">
+
+        <ImageView
+            android:id="@+id/iv_mv_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/pic_bg"
+            android:scaleType="centerCrop"
+            />
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/tv_mv_list_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxLines="1"
         android:ellipsize="end"
-        android:textSize="12dp"
-        android:textColor="#000"
+        android:maxLines="1"
         android:text="233"
+        android:textColor="#000"
+        android:textSize="12dp"
         />
+
     <TextView
         android:id="@+id/tv_mv_list_artist"
 
-        android:textSize="10dp"
-        android:textColor="#a9a5a5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="123"
+        android:textColor="#a9a5a5"
+        android:textSize="10dp"
 
         />
 

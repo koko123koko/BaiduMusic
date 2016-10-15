@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
-
-                                                 android:layout_width="match_parent"
-                                                 android:layout_height="match_parent"
-                                                 android:orientation="vertical">
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -12,83 +12,103 @@
         android:background="#fff"
         >
 
-        <RelativeLayout
+        <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_margin="5dp"
+            android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlways|enterAlwaysCollapsed"
-
-
             >
 
-            <ImageView
-                android:id="@+id/iv_ic_mv_frag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/leftview"
-                />
+                >
 
-            <TextView
-                android:id="@+id/tv_mv_frag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_margin="5dp"
-                android:layout_toRightOf="@id/iv_ic_mv_frag"
-                android:text="全部歌单"
-                />
+                <ImageView
+                    android:id="@+id/iv_ic_mv_frag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/leftview"
+                    />
 
-            <ImageButton
-                android:id="@+id/ibtn_mv_frag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/tv_mv_frag"
-                android:background="@mipmap/bt_mv_pull_down_normal"
-                />
+                <TextView
+                    android:id="@+id/tv_mv_frag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:layout_toRightOf="@id/iv_ic_mv_frag"
+                    android:text="全部歌单"
+                    />
 
-            <TextView
-                android:id="@+id/tv_item_mv_frag_hot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="5dp"
-                android:text="最热"
-                />
+                <ImageButton
+                    android:id="@+id/ibtn_mv_frag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tv_mv_frag"
+                    android:background="@mipmap/bt_mv_pull_down_normal"
+                    />
 
-            <TextView
-                android:id="@+id/tv_item_mv_frag_new"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_margin="5dp"
-                android:layout_toLeftOf="@id/tv_item_mv_frag_hot"
-                android:text="最新"
-                />
+                <TextView
+                    android:id="@+id/tv_item_mv_frag_hot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:text="最热"
+                    />
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_item_mv_frag_new"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:layout_toLeftOf="@id/tv_item_mv_frag_hot"
+                    android:text="最新"
+                    />
+
+            </RelativeLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="fill_vertical"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-    <GridView
-
-        android:id="@+id/gv_item_mv_frag"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:horizontalSpacing="10dp"
-        android:numColumns="2"
-        android:verticalSpacing="10dp"
+        app:layout_scrollFlags="scroll"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
-    </GridView>
 
-    </android.support.v4.widget.NestedScrollView>
+        <GridView
+
+            android:id="@+id/gv_item_mv_frag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="10dp"
+            android:numColumns="2"
+            android:verticalSpacing="10dp"
+
+            >
+        </GridView>
+    </android.support.v7.widget.Toolbar>
+
+    <!--<android.support.v4.widget.NestedScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="fill_vertical"-->
+    <!--android:fillViewport="true"-->
+    <!--&gt;-->
+
+    <!---->
+
+    <!--</android.support.v4.widget.NestedScrollView>-->
 </android.support.design.widget.CoordinatorLayout>

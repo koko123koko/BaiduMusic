@@ -1,6 +1,7 @@
 package com.example.dllo.baidumusic.Fragment.LibsFragment.Rank;
 
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 
@@ -39,6 +40,9 @@ public class RankFragment extends BaseFragment {
 
         lv.setAdapter(rankLVAdapter);
 
+        View footView = LayoutInflater.from(mContext).inflate(R.layout.item_list_foot,null);
+        footView.setMinimumHeight(100);
+        lv.addFooterView(footView);
 
 
     }

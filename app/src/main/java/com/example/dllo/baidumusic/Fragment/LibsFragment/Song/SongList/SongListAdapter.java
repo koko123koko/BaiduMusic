@@ -37,6 +37,18 @@ public class SongListAdapter extends RecyclerView.Adapter {
     private ListView lv;
 
 
+//    private View FootView;
+//
+//    public void setFootView(View footView) {
+//        FootView = footView;
+//
+//        notifyItemInserted(contentBeen.size()+1);
+//    }
+//
+//    public View getFootView() {
+//        return FootView;
+//    }
+
     public void setMyItemClickListener(MyItemClickListener myItemClickListener) {
         this.myItemClickListener = myItemClickListener;
     }
@@ -45,14 +57,19 @@ public class SongListAdapter extends RecyclerView.Adapter {
         this.context = context;
     }
 
+    public void setSongInfoBeanList(List<SongInfoBean> songInfoBeanList) {
+        this.songInfoBeanList = songInfoBeanList;
+        notifyDataSetChanged();
+    }
+
     public void setContentBeen(ArrayList<SongListBean.ContentBean> contentBeen) {
         this.contentBeen = contentBeen;
 
-        for (int i = 0; i < contentBeen.size(); i++) {
-//            AsynUrl asynUrl = new AsynUrl();
-//            asynUrl.execute(contentBeen.get(i).getSong_id());
-
-        }
+//        for (int i = 0; i < contentBeen.size(); i++) {
+////            AsynUrl asynUrl = new AsynUrl();
+////            asynUrl.execute(contentBeen.get(i).getSong_id());
+//
+//        }
 
         notifyDataSetChanged();
     }
@@ -70,7 +87,7 @@ public class SongListAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
         final SongListViewHolder songListViewHolder = (SongListViewHolder) holder;
         songListViewHolder.author.setText(contentBeen.get(position).getAuthor());
@@ -96,7 +113,7 @@ public class SongListAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 if (myItemClickListener != null) {
-                    myItemClickListener.onItemClick(v, position);
+                    myItemClickListener.onItemClick(songListViewHolder.ll, position);
                 }
             }
         });
@@ -106,7 +123,7 @@ public class SongListAdapter extends RecyclerView.Adapter {
             public boolean onLongClick(View v) {
 
                 if (myItemClickListener != null) {
-                    myItemClickListener.onItemLongClick(v, position);
+                    myItemClickListener.onItemLongClick(songListViewHolder.ll, position);
                 }
 
                 return true;

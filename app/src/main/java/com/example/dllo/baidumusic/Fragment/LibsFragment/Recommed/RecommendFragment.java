@@ -1,5 +1,7 @@
 package com.example.dllo.baidumusic.Fragment.LibsFragment.Recommed;
 
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -30,6 +32,7 @@ public class RecommendFragment extends BaseFragment implements View.OnClickListe
     private MyRVAdapter myRVAdapter;
     private RecommBean recommBean;
     private LinearLayoutManager manager;
+    private SwipeRefreshLayout srf;
 
 
     @Override
@@ -44,7 +47,20 @@ public class RecommendFragment extends BaseFragment implements View.OnClickListe
     protected void initData() {
         rv.setHasFixedSize(true);
         myRVAdapter = new MyRVAdapter(getContext());
+        srf.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
+        srf.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sendGet();
+                        srf.setRefreshing(false);
+                    }
+                }, 2000);
 
+            }
+        });
 
         sendGet();
         manager = new LinearLayoutManager(getContext());
@@ -53,12 +69,20 @@ public class RecommendFragment extends BaseFragment implements View.OnClickListe
 
         rv.setLayoutManager(manager);
         rv.addItemDecoration(new RecycleViewDivider(getContext(), manager.getOrientation()));
+        //        srf.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        //            @Override
+        //            public void onRefresh() {
+        //                sendGet();
+        //            }
+        //        });
+
     }
 
     @Override
     protected void initVIew() {
         cb = bindView(R.id.frag_recommend_cb);
         rv = bindView(R.id.frag_recommend_rv);
+        srf = bindView(R.id.srf);
 
     }
 
@@ -86,37 +110,37 @@ public class RecommendFragment extends BaseFragment implements View.OnClickListe
                 //                Log.d("RecommendFragment", "recommBean.getResult().getDiyBean():" + recommBean.getResult().getDiy());
                 //                Log.d("RecommendFragment", "moduleBean.size():" + moduleBean.size());
                 //                int size = recommBean.getModule().size();
-//                DiyBean diyBean = recommBean.getResult().getDiy();
-//
-//                EntryBean entryBean = recommBean.getResult().getEntry();
-//                FocusBean focusBean = recommBean.getResult().getFocus();
-//                RadioBean radioBean = recommBean.getResult().getRadio();
-//                RecsongBean recsongBean = recommBean.getResult().getRecsong();
-//                SceneBean sceneBean = recommBean.getResult().getScene();
-//                MixBean mix1 = recommBean.getResult().getMix_1();
-//                MixBean mix5 = recommBean.getResult().getMix_5();
-//                MixBean mix9 = recommBean.getResult().getMix_9();
-//                MixBean mix22 = recommBean.getResult().getMix_22();
-//                MixBean mod7 = recommBean.getResult().getMod_7();
-//                MixBean mod26 = recommBean.getResult().getMod_26();
-//                MixBean adsmall = recommBean.getResult().getAd_small();
+                //                DiyBean diyBean = recommBean.getResult().getDiy();
+                //
+                //                EntryBean entryBean = recommBean.getResult().getEntry();
+                //                FocusBean focusBean = recommBean.getResult().getFocus();
+                //                RadioBean radioBean = recommBean.getResult().getRadio();
+                //                RecsongBean recsongBean = recommBean.getResult().getRecsong();
+                //                SceneBean sceneBean = recommBean.getResult().getScene();
+                //                MixBean mix1 = recommBean.getResult().getMix_1();
+                //                MixBean mix5 = recommBean.getResult().getMix_5();
+                //                MixBean mix9 = recommBean.getResult().getMix_9();
+                //                MixBean mix22 = recommBean.getResult().getMix_22();
+                //                MixBean mod7 = recommBean.getResult().getMod_7();
+                //                MixBean mod26 = recommBean.getResult().getMod_26();
+                //                MixBean adsmall = recommBean.getResult().getAd_small();
 
-//                for (int i = 0; i < diyBean.getResult().size(); i++) {
-//                    Log.d("RecommendFragment", diyBean.getResult().get(i).getTitle());
-//                }
+                //                for (int i = 0; i < diyBean.getResult().size(); i++) {
+                //                    Log.d("RecommendFragment", diyBean.getResult().get(i).getTitle());
+                //                }
 
 
-//                for (int i = 0; i < recommBean.getModule().size(); i++) {
-//                    Log.d("RecommendFragment" + i, recommBean.getModule().get(i).getTitle());
-//                    Log.d("RecommendFragment", recommBean.getModule().get(i).getTitle_more());
-//                    Log.d("RecommendFragment", recommBean.getModule().get(i).getJump());
-//                    Log.d("RecommendFragment", recommBean.getModule().get(i).getKey());
-//                    Log.d("RecommendFragment", recommBean.getModule().get(i).getLink_url());
-//                    Log.d("RecommendFragment", recommBean.getModule().get(i).getPos() + "");
-//                    Log.d("RecommendFragment", recommBean.getModule().get(i).getStyle() + "");
-//
-//
-//                }
+                //                for (int i = 0; i < recommBean.getModule().size(); i++) {
+                //                    Log.d("RecommendFragment" + i, recommBean.getModule().get(i).getTitle());
+                //                    Log.d("RecommendFragment", recommBean.getModule().get(i).getTitle_more());
+                //                    Log.d("RecommendFragment", recommBean.getModule().get(i).getJump());
+                //                    Log.d("RecommendFragment", recommBean.getModule().get(i).getKey());
+                //                    Log.d("RecommendFragment", recommBean.getModule().get(i).getLink_url());
+                //                    Log.d("RecommendFragment", recommBean.getModule().get(i).getPos() + "");
+                //                    Log.d("RecommendFragment", recommBean.getModule().get(i).getStyle() + "");
+                //
+                //
+                //                }
 
                 for (int i = 0; i < recommBean.getModule().size(); i++) {
                     if (2 == i || 4 == i || 7 == i || 14 == i || 8 == i) {
@@ -126,6 +150,9 @@ public class RecommendFragment extends BaseFragment implements View.OnClickListe
                 }
                 myRVAdapter.setRecommBean(recommBean);
                 myRVAdapter.setModuleBeanArrayList(moduleBean);
+
+
+
                 myRVAdapter.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {

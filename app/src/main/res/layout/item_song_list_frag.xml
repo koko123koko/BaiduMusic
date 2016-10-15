@@ -11,154 +11,152 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
 
         >
 
-
-        <RelativeLayout
-            android:id="@+id/rl_item_song_list_frag"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-
-
-            >
-
-            <ImageView
-                android:id="@+id/iv_song_list_back"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                />
-
-            <ImageView
-                android:id="@+id/iv_item_song_list_frag_pic"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_centerInParent="true"
-                android:background="@mipmap/ic_launcher"
-                app:layout_collapseMode="parallax"
-
-                />
-
-            <TextView
-                android:id="@+id/tv_item_song_list_frag_tag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/iv_item_song_list_frag_pic"
-                android:layout_centerHorizontal="true"
-                android:text="标签:欧美 游戏 兴奋"
-                android:textColor="#fff"
-                android:textSize="10dp"
-                />
-
-
-            <LinearLayout
-
-                android:id="@+id/ll_item_song_list_frag"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_alignParentBottom="true"
-                android:background="#c5767373"
-                android:orientation="horizontal"
-
-                >
-
-                <TextView
-                    android:id="@+id/tv_item_song_list_favorite"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawableLeft="@mipmap/icon_favorite"
-                    android:drawablePadding="5dp"
-                    android:paddingLeft="40dp"
-                    android:text="192"
-                    android:textColor="#fff"
-
-                    />
-                <LinearLayout
-                    style="@style/common_vertical_division_line_style"
-                  />
-                <TextView
-                    android:id="@+id/tv_item_song_list_comment"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawableLeft="@mipmap/icon_comment"
-                    android:drawablePadding="5dp"
-                    android:paddingLeft="40dp"
-                    android:text="评论"
-                    android:textColor="#e7e5e5"
-
-                    />
-                <LinearLayout
-                    style="@style/common_vertical_division_line_style"
-                    />
-                <TextView
-                    android:id="@+id/tv_item_song_list_share_playlist"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawableLeft="@mipmap/icon_share_playlist"
-                    android:drawablePadding="5dp"
-                    android:paddingLeft="40dp"
-                    android:text="分享"
-                    android:textColor="#fff"
-                    />
-
-            </LinearLayout>
-
-            <com.example.dllo.baidumusic.div.CircleImageView
-                android:id="@+id/ci_item_song_list_frag"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_above="@id/ll_item_song_list_frag"
-                android:layout_margin="5dp"
-                android:src="@mipmap/ic_launcher"
-                />
-
-            <TextView
-                android:id="@+id/tv_item_song_list_frag_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/ll_item_song_list_frag"
-                android:layout_margin="5dp"
-                android:layout_toRightOf="@id/ci_item_song_list_frag"
-                android:text="玉曲宵风"
-                android:textColor="#fff"
-                />
-
-            <TextView
-                android:id="@+id/tv_item_song_list_frag_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/ll_item_song_list_frag"
-                android:layout_alignParentRight="true"
-                android:layout_margin="5dp"
-                android:drawableLeft="@mipmap/ic_listen_count"
-                android:drawablePadding="5dp"
-                android:text="1.9万"
-                android:textColor="#fff"
-                />
-
-        </RelativeLayout>
-
-
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="700dp"
-        android:background="#fff"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
-
-        <LinearLayout
+        <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            >
 
-            android:orientation="vertical"
+            <RelativeLayout
+                android:id="@+id/rl_item_song_list_frag"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_song_list_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_item_song_list_frag_pic"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/ic_launcher"
+                    app:layout_collapseMode="parallax"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_item_song_list_frag_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_item_song_list_frag_pic"
+                    android:layout_centerHorizontal="true"
+                    android:text="标签:欧美 游戏 兴奋"
+                    android:textColor="#fff"
+                    android:textSize="10dp"
+                    />
+
+
+                <LinearLayout
+
+                    android:id="@+id/ll_item_song_list_frag"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#c5767373"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/tv_item_song_list_favorite"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableLeft="@mipmap/icon_favorite"
+                        android:drawablePadding="5dp"
+                        android:paddingLeft="40dp"
+                        android:text="192"
+                        android:textColor="#fff"
+
+                        />
+
+                    <LinearLayout
+                        style="@style/common_vertical_division_line_style"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_item_song_list_comment"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableLeft="@mipmap/icon_comment"
+                        android:drawablePadding="5dp"
+                        android:paddingLeft="40dp"
+                        android:text="评论"
+                        android:textColor="#e7e5e5"
+
+                        />
+
+                    <LinearLayout
+                        style="@style/common_vertical_division_line_style"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_item_song_list_share_playlist"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:drawableLeft="@mipmap/icon_share_playlist"
+                        android:drawablePadding="5dp"
+                        android:paddingLeft="40dp"
+                        android:text="分享"
+                        android:textColor="#fff"
+                        />
+
+                </LinearLayout>
+
+                <com.example.dllo.baidumusic.div.CircleImageView
+                    android:id="@+id/ci_item_song_list_frag"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_above="@id/ll_item_song_list_frag"
+                    android:layout_margin="5dp"
+                    android:src="@mipmap/ic_launcher"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_item_song_list_frag_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/ll_item_song_list_frag"
+                    android:layout_margin="5dp"
+                    android:layout_toRightOf="@id/ci_item_song_list_frag"
+                    android:text="玉曲宵风"
+                    android:textColor="#fff"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_item_song_list_frag_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/ll_item_song_list_frag"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="5dp"
+                    android:drawableLeft="@mipmap/ic_listen_count"
+                    android:drawablePadding="5dp"
+                    android:text="1.9万"
+                    android:textColor="#fff"
+                    />
+
+            </RelativeLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@color/white"
+            app:layout_scrollFlags="scroll"
             >
 
             <RelativeLayout
@@ -196,32 +194,56 @@
 
             </RelativeLayout>
 
-            <View
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#ba605d5d"
-                />
 
-            <android.support.v7.widget.RecyclerView
+        </android.support.v7.widget.Toolbar>
 
-                android:id="@+id/rv_item_song_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#ba605d5d"
+            />
+    </android.support.design.widget.AppBarLayout>
 
-            </android.support.v7.widget.RecyclerView>
 
-        </LinearLayout>
+    <android.support.v7.widget.RecyclerView
 
-    </android.support.v4.widget.NestedScrollView>
+        android:id="@+id/rv_item_song_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+
+    <!--<android.support.v4.widget.NestedScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="700dp"-->
+    <!--android:background="#fff"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+    <!--&gt;-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+
+    <!--android:orientation="vertical"-->
+    <!--&gt;-->
+
+
+    <!---->
+
+    <!--</LinearLayout>-->
+
+    <!--</android.support.v4.widget.NestedScrollView>-->
 
     <RelativeLayout
         android:id="@+id/fl_item_top_frag"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-
-        app:theme="@style/Animation.AppCompat.Dialog"
+        android:addStatesFromChildren="true"
         >
 
         <ImageView
@@ -235,6 +257,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:gravity="center"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:scrollbars="horizontal"
+            android:singleLine="false"
             android:text="我只是,想陪你一起到老"
             android:textColor="#fff"
 

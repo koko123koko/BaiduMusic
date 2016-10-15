@@ -46,6 +46,7 @@
         </LinearLayout>
 
         <ListView
+
             android:id="@+id/lv_popup_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -59,6 +60,7 @@
     </LinearLayout>
 
     <Button
+
         android:id="@+id/btn_popup_item_close"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
