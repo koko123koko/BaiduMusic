@@ -42,7 +42,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
-        android:name=".VolleyRequest.MyApp"
+        android:name=".mvolley.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
@@ -78,7 +78,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".Service.SoundService"/>
+        <service android:name=".mservice.SoundService"/>
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"
@@ -160,7 +160,7 @@
 
         <!-- User defined.  For test only  用户自定义的广播接收器-->
         <receiver
-            android:name=".ReceiverBrocast.MyReceiver"
+            android:name=".recevie.MyReceiver"
             android:exported="false"
             android:enabled="true">
             <intent-filter>
@@ -179,7 +179,7 @@
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
         <meta-data android:name="JPUSH_APPKEY" android:value="d6a1118259c4b383e93ca11f" />
 
-        <activity android:name=".LRC.LRCArt">
+        <activity android:name=".mlrc.LRCArt">
 
         </activity>
     </application>

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.dllo.baidumusic.Service.SoundService;
+import com.example.dllo.baidumusic.mservice.SoundService;
 
 /**
  * Created by dllo on 16/10/13.
@@ -14,10 +14,10 @@ public class NotificatoinBrocastReceiver extends BroadcastReceiver {
 
 
     public static final String PLAY_PREVIOUS = "PLAY_PREVIOUS";
+    public static final String JUMP_TO_MUSIC_PLAYER = "JUMP TO MUSIC PLAYER";
     public static final String PLAY_NEXT = "PLAY_NEXT";
     public static final String PLAY_PAUSE = "PLAY_PAUSE";
     public static final String PLAYER_CANCEL = "PLAYER_CANCEL";
-    public static final String JUMP_TO_MUSIC_PLAYER = "JUMP TO MUSIC PLAYER";
 
     private SoundService soundService;
 

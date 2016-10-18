@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.drawable.ColorDrawable;
 import android.os.IBinder;
+import android.os.Parcelable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -24,22 +26,24 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.dllo.baidumusic.Adapter.MyVPAdapter;
-import com.example.dllo.baidumusic.Base.BaseActivity;
-import com.example.dllo.baidumusic.Bus.InfoBeanEvent;
-import com.example.dllo.baidumusic.Bus.RepleseFragEvent;
-import com.example.dllo.baidumusic.Fragment.LibsFragment.Song.SongList.PopupAdapter;
-import com.example.dllo.baidumusic.Fragment.LibsFragment.Song.SongList.SongInfoBean;
-import com.example.dllo.baidumusic.Fragment.LiveFragment;
-import com.example.dllo.baidumusic.Fragment.MSGFragment;
-import com.example.dllo.baidumusic.Fragment.MusicFragment;
-import com.example.dllo.baidumusic.Fragment.MyFragment;
-import com.example.dllo.baidumusic.LRC.LRCFrag;
-import com.example.dllo.baidumusic.Service.SoundService;
-import com.example.dllo.baidumusic.Service.SoundServiceBinder;
-import com.example.dllo.baidumusic.Service.SoundServiceBinderCallBack;
-import com.example.dllo.baidumusic.VolleyRequest.DisplaySingle;
+import com.example.dllo.baidumusic.mutil.CommonUtils;
+import com.example.dllo.baidumusic.mvolley.DisplaySingle;
+import com.example.dllo.baidumusic.adapterbase.MyVPAdapter;
+import com.example.dllo.baidumusic.basefrag.BaseActivity;
+import com.example.dllo.baidumusic.mbus.InfoBeanEvent;
+import com.example.dllo.baidumusic.mbus.RepleseFragEvent;
+import com.example.dllo.baidumusic.mfragment.LiveFragment;
+import com.example.dllo.baidumusic.mfragment.MSGFragment;
+import com.example.dllo.baidumusic.mfragment.MusicFragment;
+import com.example.dllo.baidumusic.mfragment.MyFragment;
+import com.example.dllo.baidumusic.mfragment.mlibsfrag.song.songlist.PopupAdapter;
+import com.example.dllo.baidumusic.mfragment.mlibsfrag.song.songlist.SongInfoBean;
+import com.example.dllo.baidumusic.mlrc.LRCFrag;
+import com.example.dllo.baidumusic.mservice.SoundService;
+import com.example.dllo.baidumusic.mservice.SoundServiceBinder;
+import com.example.dllo.baidumusic.mservice.SoundServiceBinderCallBack;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -76,6 +80,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private RelativeLayout ll;
     private ListView lv;
     private Button btnClose;
+    private Intent intent;
 
     //    private static FragmentManager fragmentManager;
 
@@ -112,12 +117,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnNext.setOnClickListener(this);
         btnPlay.setOnClickListener(this);
         list.setOnClickListener(this);
-        bindMusicService();
+        //        bindMusicService();
 
         if (currentSong == null) {
             btnNext.setClickable(false);
             btnPlay.setClickable(false);
             list.setClickable(false);
+            ll.setClickable(false);
         } else {
             author.setText(currentSong.getSonginfo().getAuthor());
             songName.setText(currentSong.getSonginfo().getTitle());
@@ -125,20 +131,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             btnNext.setClickable(true);
             btnPlay.setClickable(true);
             list.setClickable(true);
+            ll.setClickable(true);
 
         }
+
+
 
         ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, LRCArt.class);
-//                intent.putExtra("songInfoBean", currentSong);
-//                startActivity(intent);
-                LRCFrag lrcFrag = new LRCFrag();
-                InfoBeanEvent event = new InfoBeanEvent();
-                event.setSongInfoBeanList(songs);
-                EventBus.getDefault().post(event);
+                //                Intent intent = new Intent(MainActivity.this, LRCArt.class);
+                //                intent.putExtra("songInfoBean", currentSong);
+                //                startActivity(intent);
+                if (songs == null){
+                    Toast.makeText(MainActivity.this, "无歌曲", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
+
+                LRCFrag lrcFrag = new LRCFrag();
+                lrcFrag.setSongs(songs);
+                lrcFrag.setCurrentPosition(currentPosition);
+
+//                InfoBeanEvent event = new InfoBeanEvent();
+//                event.setSongInfoBeanList(songs);
+//                event.setPosition(currentPosition);
+//                EventBus.getDefault().post(event);
 
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
@@ -178,8 +196,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        //        if (mSoundService != null)
-        //            stopService(new Intent(MainActivity.this, SoundService.class));
+        if (mSoundService != null)
+            stopService(intent);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -201,11 +219,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             btnNext.setClickable(true);
             btnPlay.setClickable(true);
             list.setClickable(true);
+            ll.setClickable(true);
+            if (mSoundService == null) {
+                bindMusicService();
+            } else {
+                mSoundService.play(currentPosition);
+            }
+
+
         }
 
     }
-
-
 
 
     public void repleseFrag(Fragment fragment) {
@@ -229,8 +253,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onPause() {
         super.onPause();
-        //        if (mServiceConnection != null && mSoundService != null)
-        //            unbindService(mServiceConnection);
+        if (mServiceConnection != null && mSoundService != null)
+            unbindService(mServiceConnection);
     }
 
     @Override
@@ -241,13 +265,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 Log.d("MainActivity", "main_ibtn_next");
                 if (mSoundService == null) {
                     // 将 currentPosition 增加1，如果到 list 尾就返回第一个
-                    //                    bindMusicService();
-                    //                    if (currentPosition == (songs.size() - 1)) {
-                    //                        currentPosition = 0;
-                    //                    }
-                    //                    else {
-                    //                        currentPosition++;
-                    //                    }
+                    if (currentPosition == (songs.size() - 1)) {
+                        currentPosition = 0;
+                    } else {
+                        currentPosition++;
+                    }
+                    bindMusicService();
                     return;
                 }
                 if (mBound) {
@@ -289,6 +312,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void defineServiceConnection() {
+
+        if (!CommonUtils.isServiceWorked(SoundService.SERVICE_NAME, this)) {
+            intent = new Intent(this, SoundService.class);
+            intent.putExtra("playing", true);
+            intent.putExtra("position", currentPosition);
+            intent.putParcelableArrayListExtra("songInfo", (ArrayList<? extends Parcelable>) songs);
+            startService(intent);
+
+        }
 
         mServiceConnection = new ServiceConnection() {
             @Override
@@ -419,6 +451,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         footView.setMinimumHeight(100);
         lv.addFooterView(footView);
 
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intent = new Intent(MainActivity.this, SoundService.class);
+//                intent.putExtra("playing", true);
+//                intent.putExtra("position", position);
+//                intent.putParcelableArrayListExtra("songInfo", (ArrayList<? extends Parcelable>) songs);
+//                startService(intent);
+                InfoBeanEvent event = new InfoBeanEvent();
+                event.setSongInfoBeanList(songs);
+                event.setPosition(position);
+                EventBus.getDefault().post(event);
+                Log.d("SongListFrag", position+"");
+
+            }
+        });
+
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
@@ -427,4 +476,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         });
 
     }
+
+    //    private String Sename = ".Service.SoundService";
+
+//    private boolean isServiceRunning() {
+//
+//        ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+//        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+//            if (".Service.SoundService".equals(service.service.flattenToShortString())) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 }
