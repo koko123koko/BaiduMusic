@@ -378,7 +378,7 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
         if (pos == 4) {
             holder.gv.setId(0);
         }
-        //        holder.gv.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), false, true));
+
         ViewGroup.LayoutParams layoutParams = holder.gv.getLayoutParams();
         if (pos == 14) {
             layoutParams.height = 680;
@@ -402,7 +402,6 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
         } else {
             holder.more.setText(moduleBeanArrayList.get(position).getTitle_more());
         }
-        //         imageLoader.displayImage(moduleBeanArrayList.get(position).getPicurl(),holder.iv);
         DisplaySingle.getInstance().show(moduleBeanArrayList.get(position).getPicurl(), holder.iv);
     }
 
@@ -411,16 +410,6 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
         return moduleBeanArrayList == null ? 0 : moduleBeanArrayList.size();
     }
 
-
-    private MyInterface myInterface;
-
-    public MyInterface getMyInterface() {
-        return myInterface;
-    }
-
-    public void setMyInterface(MyInterface myInterface) {
-        this.myInterface = myInterface;
-    }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -471,14 +460,8 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
         switch (view.getId()) {
 
             case R.id.ibtn_item_adv_all:
-
-                //                MainActivity.repleseFrag(new SongerFrag());
-
-                //                Toast.makeText(context, "歌手", Toast.LENGTH_SHORT).show();
-
                 event.setFragment(new SongerFrag());
                 EventBus.getDefault().post(event);
-
                 break;
             case R.id.ibtn_item_adv_classify:
                 //                Toast.makeText(context, "歌曲分类", Toast.LENGTH_SHORT).show();
@@ -539,8 +522,7 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
 
         @Override
         public void UpdateUI(Context context, int position, String data) {
-            //            imageLoader.displayImage(data,imageView);
-            //            Picasso.with(context).load(data).into(imageView);
+
             DisplaySingle.getInstance().show(data, imageView);
 
         }

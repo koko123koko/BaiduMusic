@@ -139,6 +139,7 @@ public class LRCFrag extends BaseFragment implements View.OnClickListener {
 
         seekBar.setOnSeekBarChangeListener(mOnSeekBarChangeListener);
 
+
     }
 
     private void initButtonOnClickListener() {

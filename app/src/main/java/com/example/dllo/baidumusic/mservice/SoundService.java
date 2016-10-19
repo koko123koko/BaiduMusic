@@ -134,9 +134,6 @@ public class SoundService extends Service implements SoundServiceInterface {
             mediaPlayer = new MediaPlayer();
             String url = songInfoBeanList.get(mPosition).getBitrate().getFile_link();
 
-
-            //        String url = intent.getStringExtra("url");
-
             Log.d("SoundService", url);
             if (playing) {
                 try {

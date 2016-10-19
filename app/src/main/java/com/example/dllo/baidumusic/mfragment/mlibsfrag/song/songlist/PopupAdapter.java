@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dllo.baidumusic.R;
 
@@ -58,6 +60,12 @@ public class PopupAdapter extends BaseAdapter{
 
         popViewHolder.author.setText(songInfoBeanArrayList.get(position).getSonginfo().getAuthor());
         popViewHolder.song.setText(songInfoBeanArrayList.get(position).getSonginfo().getTitle());
+        popViewHolder.del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "功能未实现", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return convertView;
     }
@@ -66,10 +74,12 @@ public class PopupAdapter extends BaseAdapter{
 
         private final TextView author;
         private final TextView song;
+        private final ImageView del;
 
         public PopViewHolder(View itemView) {
             author = (TextView) itemView.findViewById(R.id.tv_popup_item_author);
             song = (TextView) itemView.findViewById(R.id.tv_popup_item_song);
+            del = (ImageView) itemView.findViewById(R.id.del_item_popup);
 
         }
     }
