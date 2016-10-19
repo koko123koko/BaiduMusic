@@ -4,25 +4,34 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.drawable.ColorDrawable;
 import android.os.IBinder;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dllo.baidumusic.R;
 import com.example.dllo.baidumusic.basefrag.BaseFragment;
 import com.example.dllo.baidumusic.mbus.InfoBeanEvent;
-import com.example.dllo.baidumusic.mutil.CommonUtils;
+import com.example.dllo.baidumusic.mfragment.mlibsfrag.song.songlist.PopupAdapter;
 import com.example.dllo.baidumusic.mfragment.mlibsfrag.song.songlist.SongInfoBean;
-import com.example.dllo.baidumusic.R;
 import com.example.dllo.baidumusic.mservice.SoundService;
 import com.example.dllo.baidumusic.mservice.SoundServiceBinder;
 import com.example.dllo.baidumusic.mservice.SoundServiceBinderCallBack;
+import com.example.dllo.baidumusic.mutil.CommonUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -53,7 +62,7 @@ public class LRCFrag extends BaseFragment implements View.OnClickListener {
 
 
     private List<SongInfoBean> songs;
-    private int currentPosition;
+    private int currentPosition = -1;
     private SongInfoBean currentSong;
     private ImageButton next;
     private ImageButton order;
@@ -67,6 +76,8 @@ public class LRCFrag extends BaseFragment implements View.OnClickListener {
     int playPosition;
 
     int state;
+    private ListView lv;
+    private Button btnClose;
 
 
     public LRCFrag() {
@@ -100,35 +111,32 @@ public class LRCFrag extends BaseFragment implements View.OnClickListener {
     protected void initData() {
 
         bindMusicService();
-
-        //        currentSong = songs.get(currentPosition);
+        //currentSong = songs.get(currentPosition);
 
         LRCVPAdapter lrcvpAdapter = new LRCVPAdapter(getFragmentManager());
 
-        songLrcFrag lrcFrag = new songLrcFrag();
-        lrcFrag.setCurrentSong(songs.get(currentPosition));
         ArrayList<Fragment> fragments = new ArrayList<>();
 
         fragments.add(new songDetailFrag());
         fragments.add(new songCenterFrag());
-        fragments.add(lrcFrag);
+        fragments.add(new songLrcFrag());
 
         lrcvpAdapter.setFragmentArrayList(fragments);
 
         vp.setAdapter(lrcvpAdapter);
+        vp.setCurrentItem(1);
 
         ret.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Log.d("LRCFrag", "点击");
                 getActivity().onBackPressed();
             }
         });
 
-
         initOnSeekBarChangeListener();
         initButtonOnClickListener();
+
         seekBar.setOnSeekBarChangeListener(mOnSeekBarChangeListener);
 
     }
@@ -139,6 +147,7 @@ public class LRCFrag extends BaseFragment implements View.OnClickListener {
         order.setOnClickListener(this);
         prev.setOnClickListener(this);
         list.setOnClickListener(this);
+        like.setOnClickListener(this);
     }
 
     private void initOnSeekBarChangeListener() {
@@ -194,7 +203,9 @@ public class LRCFrag extends BaseFragment implements View.OnClickListener {
         prev = bindView(R.id.previous_btn_lrc_aty);
         list = bindView(R.id.list_btn_lrc_aty);
 
-        EventBus.getDefault().register(this);
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
     }
 
     @Override
@@ -204,15 +215,17 @@ public class LRCFrag extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         EventBus.getDefault().unregister(this);
-        if (mSoundService != null && intent != null)
+        if (mSoundService != null && intent != null) {
             getActivity().stopService(intent);
+
+            super.onDestroy();
+        }
     }
 
     public void bindMusicService() {
         defineServiceConnection(); // we define our service connection mConnection
-        Intent intent = new Intent(getActivity(), SoundService.class);
+        intent = new Intent(getActivity(), SoundService.class);
         //        intent.putExtra(MusicPlayerService.ACTIVITY_INDENTIFY, MusicPlayerService.FULLSCREEN_PLAYER_ACTIVITY);
         getActivity().bindService(intent, mServiceConnection
                 , Context.BIND_AUTO_CREATE);
@@ -228,14 +241,6 @@ public class LRCFrag extends BaseFragment implements View.OnClickListener {
             getActivity().startService(intent);
 
         }
-        //        if (!isServiceRunning()) {
-        //            intent = new Intent(getActivity(), SoundService.class);
-        //            intent.putExtra("playing", true);
-        //            intent.putExtra("position", currentPosition);
-        //            intent.putParcelableArrayListExtra("songInfo", (ArrayList<? extends Parcelable>) songs);
-        //            getActivity().startService(intent);
-        //            //            getActivity().startActivity(new Intent(getActivity(),SoundService.class));
-        //        }
         mServiceConnection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, final IBinder service) {
@@ -269,6 +274,7 @@ public class LRCFrag extends BaseFragment implements View.OnClickListener {
                         if (end != null) {
                             Log.d("LRCFrag", time);
                             end.setText(time);
+
                         }
                     }
 
@@ -312,6 +318,11 @@ public class LRCFrag extends BaseFragment implements View.OnClickListener {
                         currentPosition = position;
                     }
 
+                    @Override
+                    public void setLRC(String lrc) {
+
+                    }
+
                 });
                 mBound = true;
                 state = mSoundService.getState();
@@ -319,15 +330,14 @@ public class LRCFrag extends BaseFragment implements View.OnClickListener {
                 //                Log.d("LRCFrag", "currentSong.getBitrate().getFile_duration():" + currentSong.getBitrate().getFile_duration()+"");
 
                 currentSong = mSoundService.getSongInfoBeanList().get(currentPosition);
-                end.setText(CommonUtils.timeFormatMs2Str(currentSong.getBitrate().getFile_duration()));
-
+                end.setText(CommonUtils.timeFormatMs2Str(mSoundService.getPlayingDuration()));
 
                 //                currentSong.getBitrate().getFile_duration();
-                seekBar.setMax(currentSong.getBitrate().getFile_duration());
-                seekBar.setProgress(mSoundService.getPlayingPosition());
-
-
-                mSoundService.startSeekBarTracker(currentSong.getBitrate().getFile_duration());
+                seekBar.setMax(mSoundService.getPlayingDuration());
+                seekBar.setProgress((int) (mSoundService.getPlayingPosition() * 100f / mSoundService.getPlayingDuration()));
+                //                Log.d("LRCFrag", "mSoundService.getPlayingPosition():" + mSoundService.getPlayingPosition());
+                //
+                mSoundService.startSeekBarTracker(mSoundService.getPlayingDuration());
 
 
             }
@@ -354,15 +364,122 @@ public class LRCFrag extends BaseFragment implements View.OnClickListener {
     @Override
     public void onPause() {
         super.onPause();
-        if (mServiceConnection != null && mSoundService != null)
+        if (mServiceConnection != null)
             getActivity().unbindService(mServiceConnection);
     }
 
+    boolean flag = false;
+
     @Override
     public void onClick(View v) {
+        if (mSoundService == null) {
+            bindMusicService();
+        }
+
         switch (v.getId()) {
             case R.id.next_btn_lrc_aty:
                 Toast.makeText(mSoundService, "下一首", Toast.LENGTH_SHORT).show();
+                mSoundService.playNext();
+                break;
+            case R.id.play_btn_lrc_aty:
+                state = mSoundService.changeState();
+                switch (state) {
+                    case SoundService.PLAYING:
+                        play.setBackgroundResource(R.mipmap.bt_playpage_button_pause_normal_new);
+                        break;
+                    case SoundService.PAUSED:
+                        play.setBackgroundResource(R.mipmap.bt_playpage_button_play_normal_new);
+                        break;
+                }
+                break;
+            case R.id.previous_btn_lrc_aty:
+
+                break;
+            case R.id.list_btn_lrc_aty:
+                showPopupWindow();
+                break;
+            case R.id.order_btn_lrc_aty:
+
+                break;
+            case R.id.like_btn_lrc_aty:
+                if (!flag) {
+                    like.setBackgroundResource(R.mipmap.bt_playpage_button_like_hl_new);
+                } else {
+                    like.setBackgroundResource(R.mipmap.bt_playpage_button_like_normal_new);
+                }
+                flag = !flag;
+                break;
+
         }
+    }
+
+    private void showPopupWindow() {
+
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.popup_item, null);
+
+        final PopupWindow window = new PopupWindow(view,
+                WindowManager.LayoutParams.MATCH_PARENT,
+                1000, true);
+
+
+        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+        window.setFocusable(true);
+
+
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        window.setBackgroundDrawable(dw);
+
+        // 设置popWindow的显示和消失动画
+        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+        // 在底部显示
+        window.showAtLocation(getView(),
+                Gravity.BOTTOM, 0, 0);
+
+        lv = (ListView) view.findViewById(R.id.lv_popup_item);
+
+        btnClose = (Button) view.findViewById(R.id.btn_popup_item_close);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //                onBackPressed();
+                window.dismiss();
+            }
+        });
+
+        PopupAdapter popupAdapter = new PopupAdapter(getContext());
+
+        popupAdapter.setSongInfoBeanArrayList((ArrayList<SongInfoBean>) songs);
+        lv.setAdapter(popupAdapter);
+
+        View footView = LayoutInflater.from(getContext()).inflate(R.layout.item_list_foot, null);
+        footView.setMinimumHeight(100);
+        lv.addFooterView(footView);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //                Intent intent = new Intent(MainActivity.this, SoundService.class);
+                //                intent.putExtra("playing", true);
+                //                intent.putExtra("position", position);
+                //                intent.putParcelableArrayListExtra("songInfo", (ArrayList<? extends Parcelable>) songs);
+                //                startService(intent);
+                InfoBeanEvent event = new InfoBeanEvent();
+                event.setSongInfoBeanList(songs);
+                event.setPosition(position);
+                EventBus.getDefault().post(event);
+                Log.d("SongListFrag", position + "");
+
+            }
+        });
+
+        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                Log.d("SongListAdapter", "消失");
+            }
+        });
+
     }
 }

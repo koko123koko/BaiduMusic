@@ -113,6 +113,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         myVPAdapter.setArrayList(arr);
         vp.setAdapter(myVPAdapter);
         tl.setupWithViewPager(vp);
+        vp.setCurrentItem(1);
 
         btnNext.setOnClickListener(this);
         btnPlay.setOnClickListener(this);
@@ -148,10 +149,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     return;
                 }
 
-
                 LRCFrag lrcFrag = new LRCFrag();
                 lrcFrag.setSongs(songs);
                 lrcFrag.setCurrentPosition(currentPosition);
+                Log.d("MainActivity", "currentPosition:" + currentPosition);
 
 //                InfoBeanEvent event = new InfoBeanEvent();
 //                event.setSongInfoBeanList(songs);
@@ -194,10 +195,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+
         EventBus.getDefault().unregister(this);
-        if (mSoundService != null)
+        if (mSoundService != null && intent != null){
             stopService(intent);
+        }
+        if (mServiceConnection != null && mSoundService != null)
+            unbindService(mServiceConnection);
+
+        super.onDestroy();
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -253,8 +260,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onPause() {
         super.onPause();
-        if (mServiceConnection != null && mSoundService != null)
-            unbindService(mServiceConnection);
+
+
     }
 
     @Override
@@ -280,13 +287,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
                 break;
             case R.id.main_ibtn_play:
-                Log.d("MainActivity", "main_ibtn_play");
+
                 if (mSoundService == null) {
                     bindMusicService();
                     return;
                 }
                 if (mBound) {
                     mState = mSoundService.changeState();
+
                     switch (mState) {
                         case SoundService.PAUSED:
                             btnPlay.setBackgroundResource(R.mipmap.bt_minibar_play_normal);
@@ -296,7 +304,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                             break;
                     }
                 }
-
                 break;
             case R.id.main_ibtn_playinglist:
                 showPopupWindow();
@@ -306,9 +313,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     public void bindMusicService() {
         defineServiceConnection();
-        Intent intent = new Intent(MainActivity.this, SoundService.class);
+        intent =  new Intent(MainActivity.this, SoundService.class);
         bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
-        //        startService(intent);
+
     }
 
     private void defineServiceConnection() {
@@ -345,16 +352,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
                     @Override
                     public void setCurrentTime(String time) {
-
                     }
 
                     @Override
                     public void setTotalTime(String time) {
-
                     }
 
                     @Override
                     public void setMusicTitle(String title) {
+                        Log.d("MainActivity", title);
                         if (songName != null) {
                             songName.setText(title);
                         }
@@ -391,6 +397,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     @Override
                     public void setCurrentPosition(int position) {
                         currentPosition = position;
+                    }
+
+                    @Override
+                    public void setLRC(String lrc) {
+
                     }
 
                 });

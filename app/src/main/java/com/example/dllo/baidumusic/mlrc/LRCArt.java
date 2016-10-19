@@ -46,13 +46,13 @@ public class LRCArt extends BaseActivity {
 
         LRCVPAdapter lrcvpAdapter = new LRCVPAdapter(getSupportFragmentManager());
 
-        songLrcFrag lrcFrag = new songLrcFrag();
-        lrcFrag.setCurrentSong(currentSong);
+//        songLrcFrag lrcFrag = new songLrcFrag();
+//        lrcFrag.setCurrentSong(currentSong);
         ArrayList<Fragment> fragments = new ArrayList<>();
 
         fragments.add(new songDetailFrag());
         fragments.add(new songCenterFrag());
-        fragments.add(lrcFrag);
+        fragments.add(new LRCFrag());
 
 
         lrcvpAdapter.setFragmentArrayList(fragments);

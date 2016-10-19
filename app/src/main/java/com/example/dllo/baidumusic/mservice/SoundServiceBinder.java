@@ -77,5 +77,11 @@ public class SoundServiceBinder extends Binder {
             soundServiceBinderCallBack.setCurrentPosition(position);
         }
     }
+    void setLRC(String lrc){
+        if(context != null && soundServiceBinderCallBack != null){
+            soundServiceBinderCallBack.setLRC(lrc);
+        }
+    }
+
 
 }

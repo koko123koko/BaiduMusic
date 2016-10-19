@@ -44,9 +44,10 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/iv_lrc_center"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@mipmap/ic_launcher"
+                android:background="@mipmap/default_playlist_list"
                 />
 
             <LinearLayout
@@ -57,12 +58,14 @@
                 >
 
                 <TextView
+                    android:id="@+id/song_name_lrc_center"
                     android:text="小童年"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                    />
 
                 <ImageView
+                    android:id="@+id/mv_lrc_center"
                     android:layout_marginLeft="5dp"
                     android:background="@mipmap/bt_playpage_button_mv_normal_new"
                     android:layout_width="wrap_content"
@@ -79,6 +82,7 @@
                 >
 
                 <TextView
+                    android:id="@+id/songer_lrc_center"
                     android:text="李怡霖"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

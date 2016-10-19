@@ -16,6 +16,7 @@ public class LRCVPAdapter extends FragmentPagerAdapter{
 
     public void setFragmentArrayList(ArrayList<Fragment> fragmentArrayList) {
         this.fragmentArrayList = fragmentArrayList;
+        notifyDataSetChanged();
     }
 
     public LRCVPAdapter(FragmentManager fm) {

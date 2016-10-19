@@ -76,7 +76,7 @@
                             android:id="@+id/main_iv"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:background="@mipmap/ic_launcher"/>
+                            android:background="@mipmap/default_playlist_list"/>
                     </FrameLayout>
 
                     <LinearLayout
@@ -93,7 +93,7 @@
                             android:layout_toRightOf="@id/main_iv"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:text="各自远洋"
+
                             />
 
                         <TextView
@@ -105,7 +105,7 @@
                             android:layout_toRightOf="@id/main_iv"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:text="中孝介"
+
                             />
                     </LinearLayout>
 

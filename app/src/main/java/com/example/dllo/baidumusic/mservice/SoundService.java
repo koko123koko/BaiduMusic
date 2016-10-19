@@ -16,6 +16,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import com.example.dllo.baidumusic.R;
@@ -24,6 +25,7 @@ import com.example.dllo.baidumusic.mfragment.mlibsfrag.song.songlist.SongInfoBea
 import com.example.dllo.baidumusic.mutil.CommonUtils;
 import com.example.dllo.baidumusic.recevie.NotificatoinBrocastReceiver;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -106,6 +108,10 @@ public class SoundService extends Service implements SoundServiceInterface {
             return 0;
     }
 
+    public int getPlayingDuration(){
+
+        return mediaPlayer.getDuration();
+    }
 
 
     @Override
@@ -140,7 +146,7 @@ public class SoundService extends Service implements SoundServiceInterface {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                //
+
             } else {
                 mediaPlayer.pause();
             }
@@ -161,17 +167,16 @@ public class SoundService extends Service implements SoundServiceInterface {
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
-
+                     SongInfoBean.SonginfoBean songInfoBean = songInfoBeanList.get(mPosition).getSonginfo();
                     int duration = mediaPlayer.getDuration();
                     iBinder.setTotalTime(CommonUtils.timeFormatMs2Str(duration));
-
                     iBinder.SetBean(songInfoBeanList.get(mPosition));
-                    iBinder.setMusicArtist(songInfoBeanList.get(mPosition).getSonginfo().getAuthor());
+                    iBinder.setMusicArtist(songInfoBean.getAuthor());
                     iBinder.setArrayListBean(songInfoBeanList);
-                    iBinder.setMusicTitle(songInfoBeanList.get(mPosition).getSonginfo().getTitle());
-                    iBinder.setMusicPic(songInfoBeanList.get(mPosition).getSonginfo().getPic_small());
+                    iBinder.setMusicTitle(songInfoBean.getTitle());
+                    iBinder.setMusicPic(songInfoBean.getPic_small());
                     iBinder.setCurrentPosition(mPosition);
-
+                    iBinder.setLRC(songInfoBean.getLrclink());
                     startSeekBarTracker(mediaPlayer.getDuration());
                     play();
 
@@ -180,10 +185,9 @@ public class SoundService extends Service implements SoundServiceInterface {
                 }
             });
 
-            mSeekBarHandler = new Handler(){
+            mSeekBarHandler = new Handler(new Handler.Callback() {
                 @Override
-                public void handleMessage(Message msg) {
-                    super.handleMessage(msg);
+                public boolean handleMessage(Message msg) {
                     switch (msg.what){
                         case 0:
                             int ms = (int) msg.obj;
@@ -195,8 +199,11 @@ public class SoundService extends Service implements SoundServiceInterface {
 
                             break;
                     }
+                    return false;
                 }
-            };
+            });
+
+
         }
         return super.onStartCommand(intent, flags, startId);
     }
@@ -240,6 +247,9 @@ public class SoundService extends Service implements SoundServiceInterface {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        mediaPlayer.stop();
+        mediaPlayer.reset();
         mediaPlayer.release();
         stopSelf();
 
@@ -300,10 +310,9 @@ public class SoundService extends Service implements SoundServiceInterface {
         try {
             mediaPlayer.reset();
             mediaPlayer.setDataSource(this, Uri.parse(file_link));
-//            mediaPlayer.prepareAsync();
-            mediaPlayer.prepare();
-            mediaPlayer.start();
-
+            mediaPlayer.prepareAsync();
+//            mediaPlayer.prepare();
+//            mediaPlayer.start();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -312,20 +321,17 @@ public class SoundService extends Service implements SoundServiceInterface {
 
     @Override
     public void play() {
-        mediaPlayer.start();
 
+        mediaPlayer.start();
 
         if (iBinder != null) {
             iBinder.play();
-
-
         }
     }
 
     @Override
     public void pause() {
         mediaPlayer.pause();
-
         if (iBinder != null) {
             iBinder.paused();
         }
@@ -369,29 +375,18 @@ public class SoundService extends Service implements SoundServiceInterface {
 
         mRemoteViews = new RemoteViews(getPackageName(), R.layout.item_notification_view);
 
-        if (mPosition + 1 == songInfoBeanList.size()){
-            mPosition = 0;
-        }
+        String pic = songInfoBeanList.get(mPosition).getSonginfo().getPic_small();
 
-        String pic = songInfoBeanList.get(mPosition+1).getSonginfo().getPic_small();
-
-        AsyncTask asyncTask = new AsyncTask<String, Bitmap, Bitmap>() {
+        ImageLoader.getInstance().loadImage(pic,new SimpleImageLoadingListener(){
             @Override
-            protected Bitmap doInBackground(String... params) {
-
-                return ImageLoader.getInstance().loadImageSync(params[0]);
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                super.onLoadingComplete(imageUri, view, loadedImage);
+                mRemoteViews.setImageViewBitmap(R.id.iv_notification,loadedImage);
+                if (mNotification != null){
+                    mNotificationManager.notify(1,mNotification);
+                }
             }
-
-            @Override
-            protected void onPostExecute(Bitmap bitmap) {
-                super.onPostExecute(bitmap);
-                mRemoteViews.setImageViewBitmap(R.id.iv_notification, bitmap);
-                mNotificationManager.notify(1, mNotification);
-
-            }
-
-
-        }.execute(pic);
+        });
 
 
         mRemoteViews.setTextViewText(R.id.tv_song_notification, songInfoBeanList.get(mPosition).getSonginfo().getTitle());
@@ -418,9 +413,7 @@ public class SoundService extends Service implements SoundServiceInterface {
         PendingIntent pIntentCancel = PendingIntent.getBroadcast(getApplicationContext(), 0, cancelIntent, 0);
         mRemoteViews.setOnClickPendingIntent(R.id.ib_close, pIntentCancel);
 
-
         return mRemoteViews;
-
 
     }
 
@@ -430,6 +423,11 @@ public class SoundService extends Service implements SoundServiceInterface {
             mSeekBarTracker.cancel(true);
         mSeekBarTracker = null;
 
+
         return true;
     }
+
+//    public int seekToLrc(int time){
+//        return
+//    }
 }

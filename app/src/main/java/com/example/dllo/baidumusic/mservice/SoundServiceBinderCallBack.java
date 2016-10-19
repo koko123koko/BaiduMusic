@@ -19,6 +19,8 @@ public interface SoundServiceBinderCallBack {
     void setBean(SongInfoBean songInfoBean);
     void setArrayListBean(List<SongInfoBean> songInfoBeanList);
     void setCurrentPosition(int position);
+    void setLRC(String lrc);
+
 
 
 }

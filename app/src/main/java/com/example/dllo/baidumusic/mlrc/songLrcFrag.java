@@ -1,17 +1,32 @@
 package com.example.dllo.baidumusic.mlrc;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
+import android.os.IBinder;
+import android.os.Parcelable;
 import android.util.Log;
 
-import com.example.dllo.baidumusic.basefrag.BaseFragment;
-import com.example.dllo.baidumusic.mfragment.mlibsfrag.song.songlist.SongInfoBean;
 import com.example.dllo.baidumusic.R;
+import com.example.dllo.baidumusic.basefrag.BaseFragment;
 import com.example.dllo.baidumusic.div.view.ILrcBuilder;
 import com.example.dllo.baidumusic.div.view.ILrcView;
 import com.example.dllo.baidumusic.div.view.ILrcViewListener;
 import com.example.dllo.baidumusic.div.view.impl.DefaultLrcBuilder;
 import com.example.dllo.baidumusic.div.view.impl.LrcRow;
+import com.example.dllo.baidumusic.mbus.InfoBeanEvent;
+import com.example.dllo.baidumusic.mfragment.mlibsfrag.song.songlist.SongInfoBean;
+import com.example.dllo.baidumusic.mservice.SoundService;
+import com.example.dllo.baidumusic.mservice.SoundServiceBinder;
+import com.example.dllo.baidumusic.mservice.SoundServiceBinderCallBack;
+import com.example.dllo.baidumusic.mutil.CommonUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,6 +35,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -39,19 +55,43 @@ public class songLrcFrag extends BaseFragment {
     private TimerTask mTask;
 
     private SongInfoBean currentSong;
+    private Intent intent;
+    private ServiceConnection mServiceConnection;
 
-    public void setCurrentSong(SongInfoBean currentSong) {
-        this.currentSong = currentSong;
+    private SoundService mSoundService;
+    private SoundServiceBinder mSoundServiceBinder;
+    private boolean mBound;
+    private int state;
+    private int currentPosition;
+    private List<SongInfoBean> songs;
+
+    //    public void setCurrentSong(SongInfoBean currentSong) {
+    //        this.currentSong = currentSong;
+    //    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setSongInfoBeanList(InfoBeanEvent event) {
+        if (event.getSongInfoBeanList() != null) {
+            Log.d("LRCFrag", "进来了");
+            bindMusicService();
+            songs = event.getSongInfoBeanList();
+            currentPosition = event.getPosition();
+            currentSong = songs.get(currentPosition);
+        }
     }
+
+    String lrcUrl;
 
     @Override
     protected void initData() {
 
+        bindMusicService();
         //从assets目录下读取歌词文件内容
         //        String lrc = getFromAssets(currentSong.getSonginfo().getLrclink());
-        String lrcUrl = currentSong.getSonginfo().getLrclink();
-        new AsynUrl().execute(currentSong.getSonginfo().getLrclink());
-
+//        if (lrcUrl != null) {
+//            new AsynUrl().execute(currentSong.getSonginfo().getLrclink());
+//        }
         //开始播放歌曲并同步展示歌词
         //        beginLrcPlay();
 
@@ -59,10 +99,7 @@ public class songLrcFrag extends BaseFragment {
         mLrcView.setListener(new ILrcViewListener() {
             //当歌词被用户上下拖动的时候回调该方法,从高亮的那一句歌词开始播放
             public void onLrcSeeked(int newPosition, LrcRow row) {
-                if (mPlayer != null) {
-                    //                    Log.d(TAG, "onLrcSeeked:" + row.time);
-                    mPlayer.seekTo((int) row.time);
-                }
+                mSoundService.skipToPoint((int) row.time);
             }
         });
 
@@ -71,6 +108,131 @@ public class songLrcFrag extends BaseFragment {
     @Override
     protected void initVIew() {
         mLrcView = bindView(R.id.lrcview_lrc_item);
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    public void bindMusicService() {
+        defineServiceConnection(); // we define our service connection mConnection
+        intent = new Intent(getActivity(), SoundService.class);
+        //        intent.putExtra(MusicPlayerService.ACTIVITY_INDENTIFY, MusicPlayerService.FULLSCREEN_PLAYER_ACTIVITY);
+        getActivity().bindService(intent, mServiceConnection
+                , Context.BIND_AUTO_CREATE);
+    }
+
+    private void defineServiceConnection() {
+
+        if (!CommonUtils.isServiceWorked(SoundService.SERVICE_NAME, getActivity())) {
+            intent = new Intent(getActivity(), SoundService.class);
+            intent.putExtra("playing", true);
+            intent.putExtra("position", currentPosition);
+            intent.putParcelableArrayListExtra("songInfo", (ArrayList<? extends Parcelable>) songs);
+            getActivity().startService(intent);
+        }
+
+        mServiceConnection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, final IBinder service) {
+                mSoundServiceBinder = (SoundServiceBinder) service;
+                //                        if (songName != null) {
+                //                            songName.setText(title);
+                //                        }
+                //                        if (author != null) {
+                //                            author.setText(artist);
+                //                        }
+                //                        if (pic != null) {
+                //                            DisplaySingle.getInstance().show(urlPic, pic);
+                //                        }
+                //                        if (songInfoBean != null){
+                //                        }
+                //                        if (songs != null){
+                //                        }
+                mSoundService = mSoundServiceBinder.getSoundService(new SoundServiceBinderCallBack() {
+                    @Override
+                    public void setImagePlay() {
+
+                    }
+                    @Override
+                    public void setImagePaused() {
+
+                    }
+                    @Override
+                    public void setCurrentTime(String time) {
+
+                    }
+                    @Override
+                    public void setTotalTime(String time) {
+
+                    }
+
+                    @Override
+                    public void setMusicTitle(String title) {
+
+                    }
+
+                    @Override
+                    public void setMusicArtist(String artist) {
+
+                    }
+
+                    @Override
+                    public void setMusicPic(String urlPic) {
+
+                    }
+
+                    @Override
+                    public void setBean(SongInfoBean songInfoBean) {
+                        currentSong = songInfoBean;
+                    }
+
+                    @Override
+                    public void setArrayListBean(List<SongInfoBean> songInfoBeanList) {
+                        songs = songInfoBeanList;
+                    }
+
+                    @Override
+                    public void setCurrentPosition(int position) {
+                        currentPosition = position;
+                    }
+
+                    @Override
+                    public void setLRC(String lrc) {
+
+                            lrcUrl = lrc;
+                            new AsynUrl().execute(lrcUrl);
+
+                    }
+
+
+
+                });
+                mBound = true;
+                state = mSoundService.getState();
+                //                seekBar.setMax(Integer.parseInt());
+                //                Log.d("LRCFrag", "currentSong.getBitrate().getFile_duration():" + currentSong.getBitrate().getFile_duration()+"");
+
+                //                currentSong = mSoundService.getSongInfoBeanList().get(currentPosition);
+                //                end.setText(CommonUtils.timeFormatMs2Str(currentSong.getBitrate().getFile_duration()));
+                //
+                //
+                //                //                currentSong.getBitrate().getFile_duration();
+                //                seekBar.setMax(currentSong.getBitrate().getFile_duration());
+                //                seekBar.setProgress(mSoundService.getPlayingPosition());
+                //
+                //
+                //                mSoundService.startSeekBarTracker(currentSong.getBitrate().getFile_duration());
+
+
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+                mBound = false;
+
+            }
+        };
+
     }
 
     @Override
@@ -130,6 +292,7 @@ public class songLrcFrag extends BaseFragment {
      */
 
     MediaPlayer mPlayer;
+
     /**
      * 开始播放歌曲并同步展示歌词
      */
