@@ -22,5 +22,4 @@ public interface SoundServiceBinderCallBack {
     void setLRC(String lrc);
 
 
-
 }

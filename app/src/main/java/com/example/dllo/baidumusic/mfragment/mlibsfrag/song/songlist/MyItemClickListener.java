@@ -7,7 +7,7 @@ import android.view.View;
  */
 public interface MyItemClickListener {
 
-    public void onItemClick(View view,int position);
+     void onItemClick(View view,int position);
 
-    public void onItemLongClick(View view, int position);
+     void onItemLongClick(View view, int position);
 }

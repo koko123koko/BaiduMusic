@@ -74,6 +74,7 @@ public class SongListFrag extends BaseFragment {
     public void setUrl(String url) {
         Url = url;
 
+
     }
 
 

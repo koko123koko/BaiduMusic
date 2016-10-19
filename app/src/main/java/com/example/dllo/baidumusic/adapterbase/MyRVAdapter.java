@@ -333,35 +333,35 @@ public class MyRVAdapter extends RecyclerView.Adapter implements AdapterView.OnI
                 }
                 break;
             case 4:
-                BTestAdapter diyBaseAdapter = new BTestAdapter(context, diyBean.getResult());
+                BTestAdapter diyBaseAdapter = new BTestAdapter<>(context, diyBean.getResult());
                 show((Mix1ViewHolder) holder, diyBaseAdapter, num, position);
                 break;
             case 6:
-                BTestAdapter mix1BaseAdapter = new BTestAdapter(context, mix1.getResult().subList(0, 6));
+                BTestAdapter mix1BaseAdapter = new BTestAdapter<>(context, mix1.getResult().subList(0, 6));
                 show((Mix1ViewHolder) holder, mix1BaseAdapter, num, position);
                 break;
             case 7:
-                BTestAdapter bTestAdapter = new BTestAdapter(context, mix22.getResult());
+                BTestAdapter bTestAdapter = new BTestAdapter<>(context, mix22.getResult());
                 show((Mix1ViewHolder) holder, bTestAdapter, num, position);
                 break;
             case 10:
-                BTestAdapter recsongAdapter = new BTestAdapter(context, recsongBean.getResult().subList(0, 3));
+                BTestAdapter recsongAdapter = new BTestAdapter<>(context, recsongBean.getResult().subList(0, 3));
                 show((Mix1ViewHolder) holder, recsongAdapter, num, position);
                 break;
             case 11:
-                BTestAdapter mix9BaseAdapter = new BTestAdapter(context, mix9.getResult());
+                BTestAdapter mix9BaseAdapter = new BTestAdapter<>(context, mix9.getResult());
                 show((Mix1ViewHolder) holder, mix9BaseAdapter, num, position);
                 break;
             case 12:
-                BTestAdapter mix5BaseAdapter = new BTestAdapter(context, mix5.getResult());
+                BTestAdapter mix5BaseAdapter = new BTestAdapter<>(context, mix5.getResult());
                 show((Mix1ViewHolder) holder, mix5BaseAdapter, num, position);
                 break;
             case 13:
-                BTestAdapter radioBaseAdapter = new BTestAdapter(context, radioBean.getResult());
+                BTestAdapter radioBaseAdapter = new BTestAdapter<>(context, radioBean.getResult());
                 show((Mix1ViewHolder) holder, radioBaseAdapter, num, position);
                 break;
             case 14:
-                BTestAdapter mod7Adapter = new BTestAdapter(context, mod7.getResult().subList(0,3));
+                BTestAdapter mod7Adapter = new BTestAdapter<>(context, mod7.getResult().subList(0,3));
                 show((Mix1ViewHolder) holder, mod7Adapter, num, position);
                 break;
 

@@ -68,12 +68,7 @@ public class RecommendFragment extends BaseFragment implements View.OnClickListe
 
         rv.setLayoutManager(manager);
         rv.addItemDecoration(new RecycleViewDivider(getContext(), manager.getOrientation()));
-        //        srf.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-        //            @Override
-        //            public void onRefresh() {
-        //                sendGet();
-        //            }
-        //        });
+
 
     }
 

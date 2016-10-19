@@ -49,10 +49,7 @@ public class MSGAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         MsgViewHolder msgViewHolder = (MsgViewHolder)holder;
-//        msgViewHolder.disc.setText(msgBeanArrayList.get(position).getComment_num());
-//        msgViewHolder.content.setText(msgBeanArrayList.get(position).getContent().getTitle());
 
-//        msgViewHolder.time.setText(msgBeanArrayList.get(position).getCtime());
         Log.d("MSGAdapter", "msgBeanArrayList.size():" + msgBeanArrayList.size());
     }
 

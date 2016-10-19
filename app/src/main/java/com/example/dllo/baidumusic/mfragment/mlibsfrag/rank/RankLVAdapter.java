@@ -14,6 +14,7 @@ import com.example.dllo.baidumusic.R;
 import com.example.dllo.baidumusic.mvolley.DisplaySingle;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -22,32 +23,13 @@ import java.util.ArrayList;
 public class RankLVAdapter extends BaseAdapter implements View.OnClickListener {
 
     ArrayList<RankBean.Rank> arrayList;
-    ArrayList<RankBean.Rank.ContentBean> contentBeen;
     Context context;
-//    private final DisplayImageOptions options;
-    //    ArrayList<Integer> imgs;
-//    ArrayList<String> top;
+    private List<RankBean.Rank.ContentBean> content;
 
-//    public void setTop(ArrayList<String> top) {
-//        this.top = top;
-//    }
-//
-//    public void setImgs(ArrayList<Integer> imgs) {
-//        this.imgs = imgs;
-//    }
 
     public RankLVAdapter(Context context) {
         this.context = context;
-//        options = new DisplayImageOptions
-//                .Builder()
-//                .showImageForEmptyUri(R.mipmap.ic_launcher)
-//                .showImageOnLoading(R.mipmap.ic_launcher)
-//                .cacheInMemory(true)
-//                .cacheOnDisk(true)
-//                .considerExifParams(true)
-//                .build();
     }
-
 
 
     public void setArrayList(ArrayList<RankBean.Rank> arrayList) {
@@ -76,33 +58,26 @@ public class RankLVAdapter extends BaseAdapter implements View.OnClickListener {
     public View getView(int i, View view, ViewGroup viewGroup) {
         RankViewHolder rankViewHolder = null;
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.item_rank_lv,null);
+            view = LayoutInflater.from(context).inflate(R.layout.item_rank_lv, null);
             rankViewHolder = new RankViewHolder(view);
             view.setTag(rankViewHolder);
         } else {
-            rankViewHolder = (RankViewHolder)view.getTag();
+            rankViewHolder = (RankViewHolder) view.getTag();
         }
-//        Log.d("RankLVAdapter", arrayList.get(0).getContent().get(i).getTitle() + "-" + arrayList.get(0).getContent().get(i).getAuthor());
+
         rankViewHolder.ibtn.setOnClickListener(this);
 
-//        for (int j = 0; j < 3; j++) {
-            rankViewHolder.number1.setText(arrayList.get(i).getContent().get(0).getTitle()+"-"+ arrayList.get(i).getContent().get(0).getAuthor());
-            rankViewHolder.number2.setText(arrayList.get(i).getContent().get(1).getTitle()+"-"+ arrayList.get(i).getContent().get(1).getAuthor());
-            rankViewHolder.number3.setText(arrayList.get(i).getContent().get(2).getTitle()+"-"+ arrayList.get(i).getContent().get(2).getAuthor());
-//            Log.d("RankLVAdapter", arrayList.get(0).getContent().get(j).getTitle() + "-" + arrayList.get(0).getContent().get(j).getAuthor());
-
-
-//      Picasso.with(context).load(arrayList.get(i).getPic_s210()).into(rankViewHolder.iv);
-//        ImageLoader.getInstance().displayImage(arrayList.get(i).getPic_s210(),rankViewHolder.iv);
-        DisplaySingle.getInstance().show(arrayList.get(i).getPic_s210(),rankViewHolder.iv);
-
+        content = arrayList.get(i).getContent();
+        rankViewHolder.number1.setText(content.get(0).getTitle() + "-" + content.get(0).getAuthor());
+        rankViewHolder.number2.setText(content.get(1).getTitle() + "-" + content.get(1).getAuthor());
+        rankViewHolder.number3.setText(content.get(2).getTitle() + "-" + content.get(2).getAuthor());
+        DisplaySingle.getInstance().show(arrayList.get(i).getPic_s210(), rankViewHolder.iv);
         rankViewHolder.top.setText(arrayList.get(i).getName());
         return view;
     }
 
     @Override
     public void onClick(View view) {
-
     }
 
     class RankViewHolder {

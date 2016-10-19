@@ -54,11 +54,11 @@ public class SongFragment extends BaseFragment {
                 GsonRequest<SongBean> gsonRequest = new GsonRequest<SongBean>(url, SongBean.class, new Response.Listener<SongBean>() {
                     @Override
                     public void onResponse(SongBean response) {
-                        SongBean  songBean = response;
+
                         ArrayList<SongBean> songBeanArray = new ArrayList<>();
-                        songBeanArray.add(songBean);
-                        ArrayList<SongBean.DiyInfoBean> contentBeanArray = (ArrayList<SongBean.DiyInfoBean>) songBean.getDiyInfo();
-                        songGVAdapter = new BTestAdapter(getContext(), contentBeanArray);
+                        songBeanArray.add(response);
+                        ArrayList<SongBean.DiyInfoBean> contentBeanArray = (ArrayList<SongBean.DiyInfoBean>) response.getDiyInfo();
+                        songGVAdapter = new BTestAdapter<>(getContext(), contentBeanArray);
                         songGVAdapter.setPos(16);
                         gv.setAdapter(songGVAdapter);
 

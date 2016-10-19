@@ -25,13 +25,8 @@ public class MSGFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-//        BTestAdapter bTestAdapter = new BTestAdapter(getContext(),);
-//
-//        rv.setAdapter(bTestAdapter);
-
 
         sendGet();
-
         msgAdapter = new MSGAdapter(getContext());
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         rv.setLayoutManager(manager);
@@ -40,9 +35,7 @@ public class MSGFragment extends BaseFragment {
 
     @Override
     protected void initVIew() {
-
         rv = bindView(R.id.rv_frag_msgmusic);
-
     }
 
     @Override
@@ -61,14 +54,10 @@ public class MSGFragment extends BaseFragment {
             @Override
             public void onResponse(MSGBean response) {
 
-                MSGBean msgBean = response;
-                msg = msgBean.getMsg();
-
+                msg = response.getMsg();
                 msgAdapter.setMsgBeanArrayList(msg);
                 rv.setAdapter(msgAdapter);
 
-
-//                msgBean.getTopics();
             }
         }, new Response.ErrorListener() {
             @Override

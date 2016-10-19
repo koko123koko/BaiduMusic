@@ -66,8 +66,8 @@ public class RankFragment extends BaseFragment {
         GsonRequest<RankBean> gsonRequest = new GsonRequest<RankBean>(url, RankBean.class, new Response.Listener<RankBean>() {
             @Override
             public void onResponse(RankBean response) {
-                RankBean  rankBean = response;
-                ArrayList<RankBean.Rank> contentBeanArrayList = (ArrayList<RankBean.Rank>) rankBean.getContent();
+
+                ArrayList<RankBean.Rank> contentBeanArrayList = (ArrayList<RankBean.Rank>) response.getContent();
                 Log.d("RankFragment", "contentBeanArrayList.size():" + contentBeanArrayList.size());
                 rankLVAdapter.setArrayList(contentBeanArrayList);
             }

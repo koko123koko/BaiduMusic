@@ -324,6 +324,16 @@ public class SoundService extends Service implements SoundServiceInterface {
         if (iBinder != null) {
             iBinder.play();
         }
+        if (mNotification != null){
+            if (state == PAUSED) {
+                mRemoteViews.setImageViewResource(R.id.ib_pause, R.mipmap.bt_notificationbar_pause);
+
+            } else {
+                mRemoteViews.setImageViewResource(R.id.ib_pause, R.mipmap.bt_notificationbar_play);
+
+            }
+            mNotificationManager.notify(1,mNotification);
+        }
     }
 
     @Override
@@ -331,6 +341,16 @@ public class SoundService extends Service implements SoundServiceInterface {
         mediaPlayer.pause();
         if (iBinder != null) {
             iBinder.paused();
+        }
+        if (mNotification != null){
+            if (state == PAUSED) {
+                mRemoteViews.setImageViewResource(R.id.ib_pause, R.mipmap.bt_notificationbar_pause);
+
+            } else {
+                mRemoteViews.setImageViewResource(R.id.ib_pause, R.mipmap.bt_notificationbar_play);
+
+            }
+            mNotificationManager.notify(1,mNotification);
         }
     }
 
@@ -380,6 +400,7 @@ public class SoundService extends Service implements SoundServiceInterface {
                 super.onLoadingComplete(imageUri, view, loadedImage);
                 mRemoteViews.setImageViewBitmap(R.id.iv_notification,loadedImage);
                 if (mNotification != null){
+
                     mNotificationManager.notify(1,mNotification);
                 }
             }
